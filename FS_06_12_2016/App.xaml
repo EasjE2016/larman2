@@ -1,0 +1,8 @@
+﻿<Application
+    x:Class="FS_06_12_2016.App"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FS_06_12_2016"
+    RequestedTheme="Light">
+
+</Application>
