@@ -14,7 +14,6 @@ namespace FS_06_12_2016.Model
         public int AntalUng { get; set; }
         public int AntalBarn { get; set; }
         public double AntalKuverter = 0;
-        public double TotalDagPris = 366;
 
         //private List<Person> personListe;
 
@@ -47,11 +46,7 @@ namespace FS_06_12_2016.Model
             return AntalKuverter;
 
         }
-
-        //public void GetTotalDagPris()
-        //{
-
-        //}
+        
 
 
 

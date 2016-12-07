@@ -12,20 +12,61 @@ namespace FS_06_12_2016.ViewModel
     class MainViewModel : INotifyPropertyChanged
     {
         public TilmeldteHuse hus1;
+        public Uge uge1;
+
+        private double samletPris;
+
+        public double SamletPris
+        {
+            get { return samletPris; }
+            set { samletPris = value; }
+        }
+
+        private double kuvert;
+
+        public double Kuvert
+        {
+            get { return kuvert; }
+            set { kuvert = value; }
+        }
+        private List<TilmeldteHuse> Alletilmeldtehuse = new List<TilmeldteHuse>();
 
         public MainViewModel()
         {
+
+
+            TilmeldteHuse hus1 = new TilmeldteHuse();
+            TilmeldteHuse hus2 = new TilmeldteHuse();
+            TilmeldteHuse hus3 = new TilmeldteHuse();
+
+            Alletilmeldtehuse.Add(hus1);
+            Alletilmeldtehuse.Add(hus2);
+            Alletilmeldtehuse.Add(hus3);
+
+
             hus1 = new TilmeldteHuse();
-            Dag dag1 = new Dag();
+            Dag dag1 = new Dag(Alletilmeldtehuse);
+            Dag dag2 = new Dag(Alletilmeldtehuse);
+
+            List<Dag> temp_uge = new List<Dag>();
+
+            temp_uge.Add(dag1);
+            temp_uge.Add(dag2);
             dag1.SumKuvertDag();
-            Uge uge1 = new Uge();
-            uge1.SumKuvertUge();
-            uge1.GetKuvertPrisUgen();
-            //uge1.GetUdgiftPrUgePrHus();
-            
+
+            this.uge1 = new Uge(temp_uge);
+            this.SamletPris = uge1.SumKuvertUge();
+            this.Kuvert = uge1.GetKuvertPrisUgen();
+            double udgiftPrUgePrHus = GetUdgiftPrUgePrHus(Alletilmeldtehuse[0]);
         }
 
-       
+        public double GetUdgiftPrUgePrHus(TilmeldteHuse hus)
+        {
+            double antal = hus.GetAntalKuverter();
+            double pris = antal * kuvert;
+
+            return pris;
+        }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

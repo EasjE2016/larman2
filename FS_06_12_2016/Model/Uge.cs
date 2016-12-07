@@ -10,22 +10,18 @@ namespace FS_06_12_2016.Model
     public class Uge : INotifyPropertyChanged
     {
         public List<Dag> ugedage = new List<Dag>();
-        
+        public List<TilmeldteHuse> Alletilmeldtehuse { get; set; }
+
+
         public double UdgiftUge = 1800;
         public double result;
         public Dag dag;
-        public Uge()
+        public Uge(List<Dag> dageiugen )
         {
-            Dag mandag = new Dag();
-            Dag tirsdag = new Dag();
-
-            ugedage.Add(mandag);
-            ugedage.Add(tirsdag);
-
-
-
+            this.ugedage = dageiugen;
         }
 
+        
         /// <summary>
         /// Giver antallet af kuverter pr uge (18)
         /// </summary>
@@ -53,22 +49,8 @@ namespace FS_06_12_2016.Model
             return result;
         }
 
-        //public double GetUdgiftPrUgePrHus()
-        //{
 
-            //for hver dag
-            //foreach (var dag in ugedage)
-            //{
-            //    //skal lave en beregning på HVERT HUS.
-            //    foreach (var hus in )
-            //    {
-            //        result = item.SumKuvertDag() * GetKuvertPrisUgen();
-            //        return result;
-            //    }
-
-            //}
-        //    return result;
-        //}
+        
 
         public event PropertyChangedEventHandler PropertyChanged;
 

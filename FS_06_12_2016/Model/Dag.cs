@@ -9,20 +9,16 @@ namespace FS_06_12_2016.Model
 {
     public class Dag : INotifyPropertyChanged
     {
-        List<TilmeldteHuse> Alletilmeldtehuse = new List<TilmeldteHuse>();
 
-        
 
-        public Dag()
+        public List<TilmeldteHuse> Alletilmeldtehuse { get; set;  }
+
+        public Dag(List<TilmeldteHuse> huse )
         {
-            TilmeldteHuse hus1 = new TilmeldteHuse();
-            TilmeldteHuse hus2 = new TilmeldteHuse();
-            TilmeldteHuse hus3 = new TilmeldteHuse();
-
-            Alletilmeldtehuse.Add(hus1);
-            Alletilmeldtehuse.Add(hus2);
-            Alletilmeldtehuse.Add(hus3);
+            Alletilmeldtehuse = huse;
         }
+
+
 
 
         /// <summary>
