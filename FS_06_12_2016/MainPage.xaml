@@ -13,6 +13,8 @@
     </Page.DataContext>
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+        <TextBlock x:Name="textBlockTilmeldte" HorizontalAlignment="Left" Margin="34,27,0,0" TextWrapping="Wrap" Text="Tilmeldte huse:" VerticalAlignment="Top" Height="22" Width="138"/>
+        <ListView x:Name="listViewHuse" HorizontalAlignment="Left" Height="279" Margin="21,54,0,0" VerticalAlignment="Top" Width="354" ItemsSource="{Binding Alletilmeldtehuse}"/>
 
     </Grid>
 </Page>

@@ -9,11 +9,22 @@ namespace FS_06_12_2016.Model
 {
     public class TilmeldteHuse : INotifyPropertyChanged
     {
-        private int husNr;
+        private string husNr;
         public int AntalVoksen { get; set; }
         public int AntalUng { get; set; }
         public int AntalBarn { get; set; }
         public double AntalKuverter = 0;
+        private double dagsPris;
+
+        public double DagsPris
+        {
+            get { return dagsPris; }
+            set
+            {
+                dagsPris = value;
+                OnPropertyChanged(nameof(DagsPris));
+            }
+        }
 
         //private List<Person> personListe;
 
@@ -22,12 +33,12 @@ namespace FS_06_12_2016.Model
             this.AntalVoksen = 2;
             this.AntalUng = 2;
             this.AntalBarn = 0;
-
+            this.HusNr = "14";
             GetAntalKuverter();
         }
         
 
-        public int HusNr
+        public string HusNr
         {
             get { return husNr; }
             set
@@ -46,8 +57,11 @@ namespace FS_06_12_2016.Model
             return AntalKuverter;
 
         }
-        
 
+        public override string ToString()
+        {
+            return $"Husnummer: {HusNr} Antal Voksne: {AntalVoksen} DagsPris: {DagsPris}";
+        }
 
 
         public event PropertyChangedEventHandler PropertyChanged;

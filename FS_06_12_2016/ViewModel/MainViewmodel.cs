@@ -5,6 +5,7 @@ using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
+using Windows.ApplicationModel.Appointments;
 using FS_06_12_2016.Model;
 
 namespace FS_06_12_2016.ViewModel
@@ -29,7 +30,20 @@ namespace FS_06_12_2016.ViewModel
             get { return kuvert; }
             set { kuvert = value; }
         }
-        private List<TilmeldteHuse> Alletilmeldtehuse = new List<TilmeldteHuse>();
+
+
+        private List<TilmeldteHuse> alletilmeldtehuse = new List<TilmeldteHuse>();
+
+        public List<TilmeldteHuse> Alletilmeldtehuse
+        {
+            get { return alletilmeldtehuse; }
+            set
+            {
+                alletilmeldtehuse = value;
+                OnPropertyChanged(nameof(Alletilmeldtehuse));
+            }
+        }
+
 
         public MainViewModel()
         {
@@ -57,15 +71,15 @@ namespace FS_06_12_2016.ViewModel
             this.uge1 = new Uge(temp_uge);
             this.SamletPris = uge1.SumKuvertUge();
             this.Kuvert = uge1.GetKuvertPrisUgen();
-            double udgiftPrUgePrHus = GetUdgiftPrUgePrHus(Alletilmeldtehuse[0]);
+            GetUdgiftPrUgePrHus(Alletilmeldtehuse[0]);
         }
 
-        public double GetUdgiftPrUgePrHus(TilmeldteHuse hus)
+        public void GetUdgiftPrUgePrHus(TilmeldteHuse hus)
         {
             double antal = hus.GetAntalKuverter();
             double pris = antal * kuvert;
-
-            return pris;
+            hus.DagsPris = pris;
+           
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
