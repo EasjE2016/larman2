@@ -12,12 +12,21 @@ namespace FS_06_12_2016.Model
         public List<Dag> ugedage = new List<Dag>();
         public List<TilmeldteHuse> Alletilmeldtehuse { get; set; }
 
+        private double udgiftUge;
 
-        public double UdgiftUge = 1800;
-        
+        public double UdgiftUge
+        {
+            get { return udgiftUge; }
+            set
+            {
+                udgiftUge = value;
+                OnPropertyChanged(nameof(udgiftUge));
+            }
+        }
+
         public double result;
         public Dag dag;
-        public Uge(List<Dag> dageiugen )
+        public Uge(List<Dag> dageiugen)
         {
             this.ugedage = dageiugen;
         }
@@ -43,14 +52,10 @@ namespace FS_06_12_2016.Model
         /// <returns></returns>
         public double GetKuvertPrisUgen()
         {
-
-            double result = 0;
-            result = UdgiftUge / SumKuvertUge();
-
-            return result;
+            return UdgiftUge / SumKuvertUge();
         }
 
-
+       
         
 
         public event PropertyChangedEventHandler PropertyChanged;

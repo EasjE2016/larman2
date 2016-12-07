@@ -31,7 +31,17 @@ namespace FS_06_12_2016.ViewModel
             set { kuvert = value; }
         }
 
+        private double udgiftUge;
 
+        public double UdgiftUge
+        {
+            get { return udgiftUge; }
+            set
+            {
+                udgiftUge = value;
+                OnPropertyChanged(nameof(udgiftUge));
+            }
+        }
 
         private List<TilmeldteHuse> alletilmeldtehuse = new List<TilmeldteHuse>();
 
@@ -45,11 +55,12 @@ namespace FS_06_12_2016.ViewModel
             }
         }
 
+        public RelayCommand IndtastUdgiftCommand { get; set; }
 
         public MainViewModel()
         {
 
-
+            IndtastUdgiftCommand = new RelayCommand(Beregn);
             TilmeldteHuse hus1 = new TilmeldteHuse(13,2,3,1);
             TilmeldteHuse hus2 = new TilmeldteHuse(21,1,1,1);
             TilmeldteHuse hus3 = new TilmeldteHuse(19,2,2,0);
@@ -76,15 +87,21 @@ namespace FS_06_12_2016.ViewModel
             GetUdgiftPrUgePrHus(Alletilmeldtehuse[1]);
             GetUdgiftPrUgePrHus(Alletilmeldtehuse[2]);
 
+
         }
 
         public void GetUdgiftPrUgePrHus(TilmeldteHuse hus)
         {
-            
             double antal = hus.AntalKuverter;
             double pris = antal * kuvert;
             hus.DagsPris = pris;
            
+        }
+
+        public void Beregn()
+        {
+            uge1.UdgiftUge = this.udgiftUge;
+
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

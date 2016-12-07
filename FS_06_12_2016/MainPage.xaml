@@ -6,15 +6,20 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:viewModel="using:FS_06_12_2016.ViewModel"
+    xmlns:model="using:FS_06_12_2016.Model"
     mc:Ignorable="d">
 
     <Page.DataContext>
         <viewModel:MainViewModel/>
     </Page.DataContext>
 
+    
+    
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="textBlockTilmeldte" HorizontalAlignment="Left" Margin="34,27,0,0" TextWrapping="Wrap" Text="Tilmeldte huse:" VerticalAlignment="Top" Height="22" Width="138"/>
-        <ListView x:Name="listViewHuse" HorizontalAlignment="Left" Height="279" Margin="21,54,0,0" VerticalAlignment="Top" Width="354" ItemsSource="{Binding Alletilmeldtehuse}"/>
+        <ListView x:Name="listViewHuse" HorizontalAlignment="Left" Height="279" Margin="21,54,0,0" VerticalAlignment="Top" Width="354" ItemsSource="{Binding Alletilmeldtehuse, Mode=TwoWay}"/>
+        <TextBox x:Name="textBox" HorizontalAlignment="Left" Header="Udgift for denne uge" Margin="380,69,0,0" TextWrapping="Wrap" Text="{Binding UdgiftUge, Mode=TwoWay}" VerticalAlignment="Top"/>
+        <Button x:Name="button" Content="Beregn" HorizontalAlignment="Left" Margin="380,154,0,0" VerticalAlignment="Top" Command="{Binding IndtastUdgiftCommand}"/>
 
     </Grid>
 </Page>
