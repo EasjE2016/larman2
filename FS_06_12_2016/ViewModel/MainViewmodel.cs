@@ -32,6 +32,7 @@ namespace FS_06_12_2016.ViewModel
         }
 
 
+
         private List<TilmeldteHuse> alletilmeldtehuse = new List<TilmeldteHuse>();
 
         public List<TilmeldteHuse> Alletilmeldtehuse
@@ -49,16 +50,16 @@ namespace FS_06_12_2016.ViewModel
         {
 
 
-            TilmeldteHuse hus1 = new TilmeldteHuse();
-            TilmeldteHuse hus2 = new TilmeldteHuse();
-            TilmeldteHuse hus3 = new TilmeldteHuse();
+            TilmeldteHuse hus1 = new TilmeldteHuse(13,2,3,1);
+            TilmeldteHuse hus2 = new TilmeldteHuse(21,1,1,1);
+            TilmeldteHuse hus3 = new TilmeldteHuse(19,2,2,0);
 
             Alletilmeldtehuse.Add(hus1);
             Alletilmeldtehuse.Add(hus2);
             Alletilmeldtehuse.Add(hus3);
 
 
-            hus1 = new TilmeldteHuse();
+            //hus1 = new TilmeldteHuse();
             Dag dag1 = new Dag(Alletilmeldtehuse);
             Dag dag2 = new Dag(Alletilmeldtehuse);
 
@@ -72,11 +73,15 @@ namespace FS_06_12_2016.ViewModel
             this.SamletPris = uge1.SumKuvertUge();
             this.Kuvert = uge1.GetKuvertPrisUgen();
             GetUdgiftPrUgePrHus(Alletilmeldtehuse[0]);
+            GetUdgiftPrUgePrHus(Alletilmeldtehuse[1]);
+            GetUdgiftPrUgePrHus(Alletilmeldtehuse[2]);
+
         }
 
         public void GetUdgiftPrUgePrHus(TilmeldteHuse hus)
         {
-            double antal = hus.GetAntalKuverter();
+            
+            double antal = hus.AntalKuverter;
             double pris = antal * kuvert;
             hus.DagsPris = pris;
            

@@ -14,6 +14,7 @@ namespace FS_06_12_2016.Model
 
 
         public double UdgiftUge = 1800;
+        
         public double result;
         public Dag dag;
         public Uge(List<Dag> dageiugen )

@@ -9,11 +9,12 @@ namespace FS_06_12_2016.Model
 {
     public class TilmeldteHuse : INotifyPropertyChanged
     {
-        private string husNr;
+        
         public int AntalVoksen { get; set; }
         public int AntalUng { get; set; }
         public int AntalBarn { get; set; }
-        public double AntalKuverter = 0;
+        public double AntalKuverter;
+
         private double dagsPris;
 
         public double DagsPris
@@ -26,19 +27,8 @@ namespace FS_06_12_2016.Model
             }
         }
 
-        //private List<Person> personListe;
-
-        public TilmeldteHuse()
-        {
-            this.AntalVoksen = 2;
-            this.AntalUng = 2;
-            this.AntalBarn = 0;
-            this.HusNr = "14";
-            GetAntalKuverter();
-        }
-        
-
-        public string HusNr
+        private int husNr;
+        public int HusNr
         {
             get { return husNr; }
             set
@@ -47,6 +37,20 @@ namespace FS_06_12_2016.Model
                 OnPropertyChanged(nameof(HusNr));
             }
         }
+
+        //private List<Person> personListe;
+
+        public TilmeldteHuse(int husnr,int antalvoksne,int antalung,int antalbarn)
+        {
+            this.husNr = husnr;
+            this.AntalVoksen = antalvoksne;
+            this.AntalUng = antalung;
+            this.AntalBarn = antalbarn;
+            this.AntalKuverter = GetAntalKuverter();
+        }
+        
+
+        
 
         public double GetAntalKuverter()
         {
@@ -60,7 +64,10 @@ namespace FS_06_12_2016.Model
 
         public override string ToString()
         {
-            return $"Husnummer: {HusNr} Antal Voksne: {AntalVoksen} DagsPris: {DagsPris}";
+            return $"Husnummer: {HusNr} \n " +
+                   $"Antal Voksne: {AntalVoksen} \n Antal Unge: {AntalUng} Antal Børn: {AntalBarn}" +
+                   
+                   $" DagsPris: {DagsPris}";
         }
 
 
