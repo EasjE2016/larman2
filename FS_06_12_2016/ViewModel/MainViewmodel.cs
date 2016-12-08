@@ -75,12 +75,15 @@ namespace FS_06_12_2016.ViewModel
 
         public RelayCommand IndtastUdgiftCommand { get; set; }
         public RelayCommand OpretUgeCommand { get; set; }
+        public RelayCommand FjernEtHus { get; set; }
 
         public Model.TilmeldteHuse NewHus { get; set; }
         public MainViewModel()
         {
             Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
+
             OpretUgeCommand = new RelayCommand(LavNyUge);
+            FjernEtHus = new RelayCommand(FjernHusFraDag);
             IndtastUdgiftCommand = new RelayCommand(Beregn);
             TilmeldteHuse hus1 = new TilmeldteHuse(13, 2, 3, 1);
             TilmeldteHuse hus2 = new TilmeldteHuse(21, 1, 1, 1);
@@ -141,15 +144,29 @@ namespace FS_06_12_2016.ViewModel
                 NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
                 TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
+
                 TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
+
                 TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
 
             }
             
 
         }
 
-
+        //--------------------------------------
+        //Fjern et hus fra listen en bestemt dag.
+        public void FjernHusFraDag()
+        {
+            NyUge.MandagListe.Alletilmeldtehuse.Remove(SelectedHus);
+            NyUge.TirsdagListe.Alletilmeldtehuse.Remove(SelectedHus);
+            NyUge.OnsdagListe.Alletilmeldtehuse.Remove(SelectedHus);
+            NyUge.TorsDagListe.Alletilmeldtehuse.Remove(SelectedHus);
+        }
+        //--------------------------------------
 
         public void GetUdgiftPrUgePrHus(TilmeldteHuse hus)
         {

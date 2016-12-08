@@ -13,9 +13,9 @@ namespace FS_06_12_2016.Model
         public List<TilmeldteHuse> Alletilmeldtehuse { get; set; }
 
         public Dag MandagListe { get; set; }
-        public Dag Tirsdag { get; set; }
-        public Dag Onsdag { get; set; }
-        public Dag TorsDag { get; set; }
+        public Dag TirsdagListe { get; set; }
+        public Dag OnsdagListe { get; set; }
+        public Dag TorsDagListe { get; set; }
 
 
         private double udgiftUge;
@@ -40,9 +40,9 @@ namespace FS_06_12_2016.Model
         public Uge()
         {
             MandagListe = new Dag();
-            Tirsdag = new Dag();
-            Onsdag = new Dag();
-            TorsDag = new Dag();
+            TirsdagListe = new Dag();
+            OnsdagListe = new Dag();
+            TorsDagListe = new Dag();
 
         }
 
