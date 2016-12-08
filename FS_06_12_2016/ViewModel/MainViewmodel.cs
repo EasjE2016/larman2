@@ -14,6 +14,19 @@ namespace FS_06_12_2016.ViewModel
     class MainViewModel : INotifyPropertyChanged
     {
 
+        private TilmeldteHuse selectedHuse;
+
+        public TilmeldteHuse SelectedHus
+        {
+            get { return selectedHuse; }
+            set
+            {
+                selectedHuse = value;
+                OnPropertyChanged(nameof(SelectedHus));
+            }
+        }
+
+
         public Uge NyUge { get; set; }
 
         public Dag UgeDag { get; set; }
@@ -118,6 +131,7 @@ namespace FS_06_12_2016.ViewModel
         /// </summary>
         public void LavNyUge()
         {
+            
             foreach (var hus in alletilmeldtehuse)
             {
                 //ItemsChangeObservableCollection<TilmeldteHuse> Mandagsliste = new ItemsChangeObservableCollection<TilmeldteHuse>();
@@ -131,7 +145,7 @@ namespace FS_06_12_2016.ViewModel
                 TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
 
             }
-
+            
 
         }
 
@@ -175,6 +189,7 @@ namespace FS_06_12_2016.ViewModel
             Dag tirsdagsListe = new Dag(nyliste);
             Dag OnsdagsListe = new Dag(nyliste);
             Dag TorsdagsListe = new Dag(nyliste);
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
