@@ -31,15 +31,14 @@
         <TextBox x:Name="textBoxAntalUnge" HorizontalAlignment="Left" Margin="177,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Header="Antal Unge"/>
         <TextBox x:Name="textBoxAntalBarn" HorizontalAlignment="Left" Margin="257,74,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Header="Antal Børn"/>
         <Button x:Name="buttonOpretHus" Content="Opret Hus" HorizontalAlignment="Left" Margin="364,102,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="buttonFrameldMandag" Content="Frameld" HorizontalAlignment="Left" Margin="10,651,0,0" VerticalAlignment="Top" Command="{Binding FjernEtHus}"/>
-        <Button x:Name="buttonFrameldTirsdag" Content="Frameld" HorizontalAlignment="Left" Margin="200,651,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="buttonFrameldOnsdag" Content="Frameld" HorizontalAlignment="Left" Margin="389,651,0,0" VerticalAlignment="Top"/>
-        <Button x:Name="buttonFrameldTorsdag" Content="Frameld" HorizontalAlignment="Left" Margin="580,651,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="buttonFrameldMandag" Content="Frameld" HorizontalAlignment="Left" Margin="10,674,0,0" VerticalAlignment="Top" Command="{Binding FjernEtHus}" Width="754"/>
         <Button x:Name="OpretUge" Content="Opret Uge" HorizontalAlignment="Left" Margin="817,347,0,0" VerticalAlignment="Top" Command="{Binding OpretUgeCommand}"/>
         <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="9,711,0,0" TextWrapping="Wrap" Text="Opdater hus:" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
         <TextBox x:Name="textBoxopdaterVoksen" HorizontalAlignment="Left" Margin="10,736,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalVoksen, Mode=TwoWay}" VerticalAlignment="Top" Header="Opdater voksen" />
         <TextBox x:Name="textBoxopdaterUng" HorizontalAlignment="Left" Margin="10,796,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalUng, Mode=TwoWay}" VerticalAlignment="Top" Header="Opdater ung"/>
         <TextBox x:Name="textBoxopdaterBarn" HorizontalAlignment="Left" Margin="10,856,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalBarn, Mode=TwoWay}" VerticalAlignment="Top" Header="Opdater barn"/>
+        <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,651,0,0" TextWrapping="Wrap" Text="Vælg et hus for at opdatere eller framelde." Width="754" VerticalAlignment="Top" FontWeight="Bold"/>
+        <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="10,291,0,0" TextWrapping="Wrap" Text="{Binding Ialt, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal Kuverter:"/>
 
 
     </Grid>
