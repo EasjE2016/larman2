@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Linq;
 using System.Text;
@@ -11,9 +12,9 @@ namespace FS_06_12_2016.Model
     {
 
 
-        public List<TilmeldteHuse> Alletilmeldtehuse { get; set;  }
+        public ItemsChangeObservableCollection<TilmeldteHuse> Alletilmeldtehuse { get; set;  }
 
-        public Dag(List<TilmeldteHuse> huse )
+        public Dag(ItemsChangeObservableCollection<TilmeldteHuse> huse )
         {
             Alletilmeldtehuse = huse;
         }

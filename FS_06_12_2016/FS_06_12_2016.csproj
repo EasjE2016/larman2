@@ -99,6 +99,7 @@
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\Dag.cs" />
+    <Compile Include="Model\ItemsChangeObservableCollection.cs" />
     <Compile Include="Model\TilmeldteHuse.cs" />
     <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Uge.cs" />

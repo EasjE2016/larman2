@@ -48,7 +48,11 @@ namespace FS_06_12_2016.Model
             this.AntalBarn = antalbarn;
             this.AntalKuverter = GetAntalKuverter();
         }
-        
+
+        public TilmeldteHuse()
+        {
+            
+        }
 
         
 
