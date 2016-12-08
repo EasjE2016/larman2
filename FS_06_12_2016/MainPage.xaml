@@ -17,12 +17,12 @@
 
     <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
         <TextBlock x:Name="textBlockTilmeldte" HorizontalAlignment="Left" Margin="786,403,0,0" TextWrapping="Wrap" Text="Tilmeldte huse:" VerticalAlignment="Top" Height="22" Width="138"/>
-        <ListView x:Name="listViewHuse" HorizontalAlignment="Left" Height="279" Margin="773,430,0,0" VerticalAlignment="Top" Width="354" ItemsSource="{Binding Alletilmeldtehuse, Mode=TwoWay}"/>
+        <ListView x:Name="listViewHuse" HorizontalAlignment="Left" Height="279" Margin="773,430,0,0" VerticalAlignment="Top" Width="354" ItemsSource="{Binding Alletilmeldtehuse, Mode=TwoWay}" SelectionChanged="listViewHuse_SelectionChanged"/>
         <TextBox x:Name="textBox" HorizontalAlignment="Left" Header="Udgift for denne uge" Margin="1132,445,0,0" TextWrapping="Wrap" Text="{Binding UdgiftUge, Mode=TwoWay}" VerticalAlignment="Top"/>
         <Button x:Name="button" Content="Beregn" HorizontalAlignment="Left" Margin="1132,530,0,0" VerticalAlignment="Top" Command="{Binding IndtastUdgiftCommand}"/>
         <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="650,28,0,0" TextWrapping="Wrap" Text="Fællesspisning" VerticalAlignment="Top"/>
         <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Opret Hus:" VerticalAlignment="Top"/>
-        <ListView x:Name="listViewMandag" HorizontalAlignment="Left" Height="295" Margin="10,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Mandag"/>
+        <ListView x:Name="listViewMandag" HorizontalAlignment="Left" Height="295" Margin="10,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Mandag" ItemsSource="{Binding NyUge.MandagListe.Alletilmeldtehuse}"/>
         <ListView x:Name="listViewTirsdag" HorizontalAlignment="Left" Height="295" Margin="200,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Tirsdag"/>
         <ListView x:Name="listViewOnsdag" HorizontalAlignment="Left" Height="295" Margin="389,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Onsdag"/>
         <ListView x:Name="listViewTorsdag" HorizontalAlignment="Left" Height="295" Margin="580,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Torsdag"/>
@@ -35,6 +35,7 @@
         <Button x:Name="buttonFrameldTirsdag" Content="Frameld" HorizontalAlignment="Left" Margin="200,651,0,0" VerticalAlignment="Top"/>
         <Button x:Name="buttonFrameldOnsdag" Content="Frameld" HorizontalAlignment="Left" Margin="389,651,0,0" VerticalAlignment="Top"/>
         <Button x:Name="buttonFrameldTorsdag" Content="Frameld" HorizontalAlignment="Left" Margin="580,651,0,0" VerticalAlignment="Top"/>
+        <Button x:Name="OpretUge" Content="Opret Uge" HorizontalAlignment="Left" Margin="817,347,0,0" VerticalAlignment="Top" Command="{Binding OpretUgeCommand}"/>
 
 
     </Grid>

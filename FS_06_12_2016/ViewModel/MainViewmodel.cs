@@ -14,6 +14,8 @@ namespace FS_06_12_2016.ViewModel
     class MainViewModel : INotifyPropertyChanged
     {
 
+        public Uge NyUge { get; set; }
+
         public Dag UgeDag { get; set; }
         public TilmeldteHuse hus1;
         public Uge uge1;
@@ -59,33 +61,26 @@ namespace FS_06_12_2016.ViewModel
         }
 
         public RelayCommand IndtastUdgiftCommand { get; set; }
+        public RelayCommand OpretUgeCommand { get; set; }
 
         public Model.TilmeldteHuse NewHus { get; set; }
         public MainViewModel()
         {
             Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
-
+            OpretUgeCommand = new RelayCommand(LavNyUge);
             IndtastUdgiftCommand = new RelayCommand(Beregn);
-            TilmeldteHuse hus1 = new TilmeldteHuse(13,2,3,1);
-            TilmeldteHuse hus2 = new TilmeldteHuse(21,1,1,1);
-            TilmeldteHuse hus3 = new TilmeldteHuse(19,2,2,0);
+            TilmeldteHuse hus1 = new TilmeldteHuse(13, 2, 3, 1);
+            TilmeldteHuse hus2 = new TilmeldteHuse(21, 1, 1, 1);
+            TilmeldteHuse hus3 = new TilmeldteHuse(19, 2, 2, 0);
 
             Alletilmeldtehuse.Add(hus1);
             Alletilmeldtehuse.Add(hus2);
             Alletilmeldtehuse.Add(hus3);
 
-            //laver en ny dagliste af huse
-            List<TilmeldteHuse> nylisteTilmeldteHuses = new List<TilmeldteHuse>();
-
-            //tilføjer husene
-            nylisteTilmeldteHuses.Add(hus1);
-            nylisteTilmeldteHuses.Add(hus3);
-
-            //opretter to nye dag og giver dem hver sin liste
+           //opretter to nye dag og giver dem hver sin liste
             Dag mandag = new Dag(alletilmeldtehuse);
-            //Dag tirsDag = new Dag(nylisteTilmeldteHuses);
-            //Dag onsdag = new Dag();
-            //Dag torsdag = new Dag();
+            Dag tirsDag = new Dag(alletilmeldtehuse);
+
 
             //hus1 = new TilmeldteHuse();
             //Dag dag1 = new Dag(Alletilmeldtehuse);
@@ -94,10 +89,13 @@ namespace FS_06_12_2016.ViewModel
             List<Dag> temp_uge = new List<Dag>();
 
             temp_uge.Add(mandag);
-            //temp_uge.Add(tirsDag);
-            
+            temp_uge.Add(tirsDag);
+
             this.uge1 = new Uge(temp_uge);
             this.SamletPris = uge1.SumKuvertUge();
+
+
+            NyUge = new Uge();
         }
 
         public void AddNewHus()
@@ -112,30 +110,71 @@ namespace FS_06_12_2016.ViewModel
 
             //skal lægge huset ind på ALLE dagene.
             //mandag.Add(Hus);
-            
+
         }
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public void LavNyUge()
+        {
+            foreach (var hus in alletilmeldtehuse)
+            {
+                //ItemsChangeObservableCollection<TilmeldteHuse> Mandagsliste = new ItemsChangeObservableCollection<TilmeldteHuse>();
+
+                //kopiere det hus den er nået til på listen
+                TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
+
+                TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+
+            }
+
+
+        }
+
+
 
         public void GetUdgiftPrUgePrHus(TilmeldteHuse hus)
         {
             double antal = hus.AntalKuverter;
             double pris = antal * kuvert;
             hus.DagsPris = pris;
-           
+
         }
 
         public void Beregn()
         {
-
             uge1.UdgiftUge = this.udgiftUge;
             this.Kuvert = uge1.GetKuvertPrisUgen();
             foreach (var hus in Alletilmeldtehuse)
             {
                 GetUdgiftPrUgePrHus(hus);
             }
+        }
+        public void HentHuse()
+        {
+            ItemsChangeObservableCollection<TilmeldteHuse> nyliste = new ItemsChangeObservableCollection<TilmeldteHuse>();
 
-            
-            
-            
+            foreach (var hus in alletilmeldtehuse)
+            {
+                //ItemsChangeObservableCollection<TilmeldteHuse> Mandagsliste = new ItemsChangeObservableCollection<TilmeldteHuse>();
+
+                //kopiere det hus den er nået til på listen
+                TilmeldteHuse temp_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse temp_hus2 = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse temp_hus3 = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse temp_hus4 = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                
+
+            }
+
+            Dag mandagListe = new Dag(nyliste);
+            Dag tirsdagsListe = new Dag(nyliste);
+            Dag OnsdagsListe = new Dag(nyliste);
+            Dag TorsdagsListe = new Dag(nyliste);
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

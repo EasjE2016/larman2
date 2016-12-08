@@ -12,6 +12,12 @@ namespace FS_06_12_2016.Model
         public List<Dag> ugedage = new List<Dag>();
         public List<TilmeldteHuse> Alletilmeldtehuse { get; set; }
 
+        public Dag MandagListe { get; set; }
+        public Dag Tirsdag { get; set; }
+        public Dag Onsdag { get; set; }
+        public Dag TorsDag { get; set; }
+
+
         private double udgiftUge;
 
         public double UdgiftUge
@@ -31,7 +37,15 @@ namespace FS_06_12_2016.Model
             this.ugedage = dageiugen;
         }
 
-        
+        public Uge()
+        {
+            MandagListe = new Dag();
+            Tirsdag = new Dag();
+            Onsdag = new Dag();
+            TorsDag = new Dag();
+
+        }
+
         /// <summary>
         /// Giver antallet af kuverter pr uge (18)
         /// </summary>
@@ -55,8 +69,8 @@ namespace FS_06_12_2016.Model
             return UdgiftUge / SumKuvertUge();
         }
 
-       
-        
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

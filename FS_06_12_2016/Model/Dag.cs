@@ -14,14 +14,38 @@ namespace FS_06_12_2016.Model
 
         public ItemsChangeObservableCollection<TilmeldteHuse> Alletilmeldtehuse { get; set;  }
 
+        private TilmeldteHuse hus;
+
+        public TilmeldteHuse Hus
+        {
+            get { return hus; }
+            set
+            {
+                hus = value;
+                OnPropertyChanged(nameof(Hus));
+            }
+        }
+
+
         public Dag(ItemsChangeObservableCollection<TilmeldteHuse> huse )
         {
             Alletilmeldtehuse = huse;
         }
 
+        public Dag()
+        {
+                Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
+        }
 
+        public Dag(TilmeldteHuse hus)
+        {
+            
+        }
 
-
+        public void SetHuseInd()
+        {
+            
+        }
         /// <summary>
         /// Lægger alle husenes antal kuverter sammen og returner dem.
         /// </summary>
