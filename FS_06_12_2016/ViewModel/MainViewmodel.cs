@@ -82,10 +82,8 @@ namespace FS_06_12_2016.ViewModel
 
             this.uge1 = new Uge(temp_uge);
             this.SamletPris = uge1.SumKuvertUge();
-            this.Kuvert = uge1.GetKuvertPrisUgen();
-            GetUdgiftPrUgePrHus(Alletilmeldtehuse[0]);
-            GetUdgiftPrUgePrHus(Alletilmeldtehuse[1]);
-            GetUdgiftPrUgePrHus(Alletilmeldtehuse[2]);
+            
+            
 
 
         }
@@ -100,8 +98,14 @@ namespace FS_06_12_2016.ViewModel
 
         public void Beregn()
         {
-            uge1.UdgiftUge = this.udgiftUge;
 
+            uge1.UdgiftUge = this.udgiftUge;
+            this.Kuvert = uge1.GetKuvertPrisUgen();
+            foreach (var hus in Alletilmeldtehuse)
+            {
+                GetUdgiftPrUgePrHus(hus);
+            }
+            
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
