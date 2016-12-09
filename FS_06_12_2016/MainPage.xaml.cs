@@ -26,6 +26,37 @@ namespace FS_06_12_2016
         {
             this.InitializeComponent();
         }
+        private void HamburgerButton_Click(object sender, RoutedEventArgs e)
+        {
+            SideMenu.IsPaneOpen = !SideMenu.IsPaneOpen;
+        }
+
+
+        //private void Menu_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Menu));
+        //}
+
+        private void Forside_Click(object sender, RoutedEventArgs e)
+        {
+            this.Frame.Navigate(typeof(MainPage));
+        }
+
+        //private void Person_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Personer));
+        //}
+
+        //private void MBHus_OnClick(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Huse));
+        //}
+
+        //private void Dag_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Dag));
+        //}
+
 
         private void listViewHuse_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {

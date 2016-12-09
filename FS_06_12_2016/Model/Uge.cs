@@ -9,8 +9,8 @@ namespace FS_06_12_2016.Model
 {
     public class Uge : INotifyPropertyChanged
     {
-        public List<Dag> ugedage = new List<Dag>();
-        public List<TilmeldteHuse> Alletilmeldtehuse { get; set; }
+        public ItemsChangeObservableCollection<Dag> ugedage = new ItemsChangeObservableCollection<Dag>();
+        public ItemsChangeObservableCollection<TilmeldteHuse> Alletilmeldtehuse { get; set; }
 
         public Dag MandagListe { get; set; }
         public Dag TirsdagListe { get; set; }
@@ -32,10 +32,10 @@ namespace FS_06_12_2016.Model
 
         public double result;
         public Dag dag;
-        public Uge(List<Dag> dageiugen)
-        {
-            this.ugedage = dageiugen;
-        }
+        //public Uge(List<Dag> dageiugen)
+        //{
+        //    this.ugedage = dageiugen;
+        //}
 
         public Uge()
         {
@@ -43,6 +43,13 @@ namespace FS_06_12_2016.Model
             TirsdagListe = new Dag();
             OnsdagListe = new Dag();
             TorsDagListe = new Dag();
+
+            ugedage = new ItemsChangeObservableCollection<Dag>();
+
+            this.ugedage.Add(MandagListe);
+            this.ugedage.Add(TirsdagListe);
+            this.ugedage.Add(OnsdagListe);
+            this.ugedage.Add(TorsDagListe);
 
         }
 
@@ -52,11 +59,13 @@ namespace FS_06_12_2016.Model
         /// <returns></returns>
         public double SumKuvertUge()
         {
+            
+
             double sum = 0;
 
-            foreach (var h in ugedage)
+            foreach (var hus in ugedage)
             {
-                sum += h.SumKuvertDag();
+                sum += hus.SumKuvertDag();
             }
             return sum;
         }

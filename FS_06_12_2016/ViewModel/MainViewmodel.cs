@@ -47,22 +47,26 @@ namespace FS_06_12_2016.ViewModel
 
         public Dag UgeDag { get; set; }
         public TilmeldteHuse hus1;
-        public Uge uge1;
+        //public Uge uge1;
 
-        private double samletPris;
+        //private double samletPris;
 
-        public double SamletPris
-        {
-            get { return samletPris; }
-            set { samletPris = value; }
-        }
+        //public double SamletPris
+        //{
+        //    get { return samletPris; }
+        //    set { samletPris = value; }
+        //}
 
         private double kuvert;
 
         public double Kuvert
         {
             get { return kuvert; }
-            set { kuvert = value; }
+            set
+            {
+                kuvert = value;
+                OnPropertyChanged(nameof(Kuvert));
+            }
         }
 
         private double udgiftUge;
@@ -73,7 +77,7 @@ namespace FS_06_12_2016.ViewModel
             set
             {
                 udgiftUge = value;
-                OnPropertyChanged(nameof(udgiftUge));
+                OnPropertyChanged(nameof(UdgiftUge));
             }
         }
 
@@ -102,7 +106,7 @@ namespace FS_06_12_2016.ViewModel
             OpretUgeCommand = new RelayCommand(LavNyUge);
             FjernEtHus = new RelayCommand(FjernHusFraDag);
             IndtastUdgiftCommand = new RelayCommand(Beregn);
-            TilmeldteHuse hus1 = new TilmeldteHuse(13, 2, 3, 1);
+            TilmeldteHuse hus1 = new TilmeldteHuse(18, 2, 3, 1);
             TilmeldteHuse hus2 = new TilmeldteHuse(21, 1, 1, 1);
             TilmeldteHuse hus3 = new TilmeldteHuse(19, 2, 2, 0);
 
@@ -111,22 +115,20 @@ namespace FS_06_12_2016.ViewModel
             Alletilmeldtehuse.Add(hus3);
 
             //opretter to nye dag og giver dem hver sin liste
-            Dag mandag = new Dag(alletilmeldtehuse);
-            Dag tirsDag = new Dag(alletilmeldtehuse);
+            //Dag mandag = new Dag(alletilmeldtehuse);
+            //Dag tirsDag = new Dag(alletilmeldtehuse);
 
 
 
             List<Dag> temp_uge = new List<Dag>();
 
-            temp_uge.Add(mandag);
-            temp_uge.Add(tirsDag);
+            //temp_uge.Add(mandag);
+            //temp_uge.Add(tirsDag);
 
-            this.uge1 = new Uge(temp_uge);
-            this.SamletPris = uge1.SumKuvertUge();
+            //this.uge1 = new Uge(temp_uge);
+            //this.SamletPris = uge1.SumKuvertUge();
 
-            // Rolfs test
-            UgeDag = new Dag();
-            // Rolfs test
+            
 
             NyUge = new Uge();
 
@@ -199,8 +201,8 @@ namespace FS_06_12_2016.ViewModel
 
         public void Beregn()
         {
-            uge1.UdgiftUge = this.udgiftUge;
-            this.Kuvert = uge1.GetKuvertPrisUgen();
+            NyUge.UdgiftUge = this.udgiftUge;
+            this.Kuvert = NyUge.GetKuvertPrisUgen();
             foreach (var hus in Alletilmeldtehuse)
             {
                 GetUdgiftPrUgePrHus(hus);

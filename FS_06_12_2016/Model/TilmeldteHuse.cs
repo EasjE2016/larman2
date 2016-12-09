@@ -10,9 +10,43 @@ namespace FS_06_12_2016.Model
     public class TilmeldteHuse : INotifyPropertyChanged
     {
         
-        public int AntalVoksen { get; set; }
-        public int AntalUng { get; set; }
-        public int AntalBarn { get; set; }
+        
+        private int antalVoksen;
+
+        public int AntalVoksen
+        {
+            get { return antalVoksen; }
+            set
+            {
+                antalVoksen = value;
+                OnPropertyChanged(nameof(AntalVoksen));
+            }
+        }
+
+        private int antalUng;
+
+        public int AntalUng
+        {
+            get { return antalUng; }
+            set
+            {
+                antalUng = value;
+                OnPropertyChanged(nameof(AntalUng));
+            }
+        }
+
+        private int antalBarn;
+
+        public int AntalBarn
+        {
+            get { return antalBarn; }
+            set
+            {
+                antalBarn = value;
+                OnPropertyChanged(nameof(AntalBarn));
+            }
+        }
+        
         public double AntalKuverter;
 
         private double dagsPris;
