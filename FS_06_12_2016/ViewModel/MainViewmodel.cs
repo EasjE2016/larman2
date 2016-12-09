@@ -13,6 +13,7 @@ namespace FS_06_12_2016.ViewModel
 {
     class MainViewModel : INotifyPropertyChanged
     {
+        #region Properties
         //------------------------------------------------------------------------------
         // Gør det muligt at vælge og aktivere hus fra listerne. F.eks opdatere og frameld.
         private TilmeldteHuse selectedHuse;
@@ -92,20 +93,24 @@ namespace FS_06_12_2016.ViewModel
                 OnPropertyChanged(nameof(Alletilmeldtehuse));
             }
         }
+        public Model.TilmeldteHuse NewHus { get; set; }
+        #endregion
 
         public RelayCommand IndtastUdgiftCommand { get; set; }
         public RelayCommand OpretUgeCommand { get; set; }
         public RelayCommand FjernEtHus { get; set; }
 
-        public Model.TilmeldteHuse NewHus { get; set; }
+        public RelayCommand OpretEtHus { get; set; }
 
         public MainViewModel()
         {
             Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
+            TilmeldteHuse hus = new TilmeldteHuse();
 
             OpretUgeCommand = new RelayCommand(LavNyUge);
             FjernEtHus = new RelayCommand(FjernHusFraDag);
             IndtastUdgiftCommand = new RelayCommand(Beregn);
+            OpretEtHus = new RelayCommand(AddNewHus);
             TilmeldteHuse hus1 = new TilmeldteHuse(18, 2, 3, 1);
             TilmeldteHuse hus2 = new TilmeldteHuse(21, 1, 1, 1);
             TilmeldteHuse hus3 = new TilmeldteHuse(19, 2, 2, 0);
@@ -127,22 +132,34 @@ namespace FS_06_12_2016.ViewModel
 
             //this.uge1 = new Uge(temp_uge);
             //this.SamletPris = uge1.SumKuvertUge();
+            NewHus = new TilmeldteHuse();
 
-            
 
             NyUge = new Uge();
+            
 
         }
 
         public void AddNewHus()
         {
-            TilmeldteHuse Hus = new TilmeldteHuse()
-            {
-                HusNr = NewHus.HusNr,
-                AntalVoksen = NewHus.AntalVoksen,
-                AntalUng = NewHus.AntalUng,
-                AntalBarn = NewHus.AntalBarn,
-            };
+            TilmeldteHuse hus = new TilmeldteHuse();
+            hus = NewHus;
+          
+
+            //kopiere et hus og lægger det ind
+            TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+            NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
+
+            TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+            NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
+
+            TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+            NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
+
+            TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+            NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
+
+            this.alletilmeldtehuse.Add(hus);
 
 
         }
@@ -176,7 +193,7 @@ namespace FS_06_12_2016.ViewModel
         }
         public void IaltiListe()
         {
-            
+
             Ialt = NyUge.MandagListe.SumKuvertDag();
             //Ialt = NyUge.MandagListe.Alletilmeldtehuse.Count();
         }
@@ -208,28 +225,7 @@ namespace FS_06_12_2016.ViewModel
                 GetUdgiftPrUgePrHus(hus);
             }
         }
-        public void HentHuse()
-        {
-            ItemsChangeObservableCollection<TilmeldteHuse> nyliste = new ItemsChangeObservableCollection<TilmeldteHuse>();
-
-            foreach (var hus in alletilmeldtehuse)
-            {
-
-                //kopiere det hus den er nået til på listen
-                TilmeldteHuse temp_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
-                TilmeldteHuse temp_hus2 = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
-                TilmeldteHuse temp_hus3 = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
-                TilmeldteHuse temp_hus4 = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
-
-
-            }
-
-            Dag mandagListe = new Dag(nyliste);
-            Dag tirsdagsListe = new Dag(nyliste);
-            Dag OnsdagsListe = new Dag(nyliste);
-            Dag TorsdagsListe = new Dag(nyliste);
-
-        }
+       
 
         public event PropertyChangedEventHandler PropertyChanged;
 
