@@ -50,7 +50,6 @@ namespace FS_06_12_2016.Model
             this.ugedage.Add(TirsdagListe);
             this.ugedage.Add(OnsdagListe);
             this.ugedage.Add(TorsDagListe);
-
         }
 
         /// <summary>
@@ -59,8 +58,6 @@ namespace FS_06_12_2016.Model
         /// <returns></returns>
         public double SumKuvertUge()
         {
-            
-
             double sum = 0;
 
             foreach (var hus in ugedage)
@@ -77,9 +74,6 @@ namespace FS_06_12_2016.Model
         {
             return UdgiftUge / SumKuvertUge();
         }
-
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 

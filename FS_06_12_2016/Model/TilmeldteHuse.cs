@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.ComponentModel;
+using Windows.UI.Popups;
 
 namespace FS_06_12_2016.Model
 {
     public class TilmeldteHuse : INotifyPropertyChanged
     {
-        
-        
+
+        private string dialog;
         private int antalVoksen;
 
         public int AntalVoksen
@@ -61,20 +62,50 @@ namespace FS_06_12_2016.Model
             }
         }
 
-        private int husNr;
-        public int HusNr
+        private string husNr;
+        public string HusNr
         {
             get { return husNr; }
-            set
-            {
-                husNr = value;
-                OnPropertyChanged(nameof(HusNr));
-            }
+            set {
+                {
+                    if (value.All(char.IsNumber))
+                        husNr = value;
+                    else
+                        SimpleMessageDialog();
+                }
+
+                OnPropertyChanged(nameof(HusNr)); 
+                }
         }
+        private async void SimpleMessageDialog()
+        {
+            var dialog = new MessageDialog("Prøv lige igen.");
+            dialog.Title = "Husnumre må kun bestå af hele positive tal";
+            await dialog.ShowAsync();
+        }
+
+        //private string _MyNemericStringr;
+
+        //public string MyNemericString {
+        //    get { return _MyNemericStringr; }
+        //    set {
+        //        if (value.All(char.IsDigit))
+        //            _MyNemericStringr = value;
+        //        else
+        //            _MyNemericStringr = "0";
+        //    }
+        //}
+
+
+
+
+
+
+
 
         //private List<Person> personListe;
 
-        public TilmeldteHuse(int husnr,int antalvoksne,int antalung,int antalbarn)
+        public TilmeldteHuse(string husnr,int antalvoksne,int antalung,int antalbarn)
         {
             this.husNr = husnr;
             this.AntalVoksen = antalvoksne;

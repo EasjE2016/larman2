@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Appointments;
 using FS_06_12_2016.Model;
+using Windows.UI.Popups;
 
 namespace FS_06_12_2016.ViewModel
 {
@@ -111,9 +112,9 @@ namespace FS_06_12_2016.ViewModel
             FjernEtHus = new RelayCommand(FjernHusFraDag);
             IndtastUdgiftCommand = new RelayCommand(Beregn);
             OpretEtHus = new RelayCommand(AddNewHus);
-            TilmeldteHuse hus1 = new TilmeldteHuse(18, 2, 3, 1);
-            TilmeldteHuse hus2 = new TilmeldteHuse(21, 1, 1, 1);
-            TilmeldteHuse hus3 = new TilmeldteHuse(19, 2, 2, 0);
+            TilmeldteHuse hus1 = new TilmeldteHuse("18", 2, 3, 1);
+            TilmeldteHuse hus2 = new TilmeldteHuse("21", 1, 1, 1);
+            TilmeldteHuse hus3 = new TilmeldteHuse("19", 2, 2, 0);
 
             Alletilmeldtehuse.Add(hus1);
             Alletilmeldtehuse.Add(hus2);
@@ -144,7 +145,6 @@ namespace FS_06_12_2016.ViewModel
         {
             TilmeldteHuse hus = new TilmeldteHuse();
             hus = NewHus;
-          
 
             //kopiere et hus og lægger det ind
             TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
@@ -160,8 +160,6 @@ namespace FS_06_12_2016.ViewModel
             NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
 
             this.alletilmeldtehuse.Add(hus);
-
-
         }
 
         /// <summary>
@@ -169,11 +167,8 @@ namespace FS_06_12_2016.ViewModel
         /// </summary>
         public void LavNyUge()
         {
-
             foreach (var hus in alletilmeldtehuse)
             {
-
-
                 //kopiere det hus den er nået til på listen
                 TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
                 NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
@@ -186,7 +181,6 @@ namespace FS_06_12_2016.ViewModel
 
                 TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
                 NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
-
             }
 
             IaltiListe();
