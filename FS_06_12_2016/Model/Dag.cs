@@ -10,8 +10,6 @@ namespace FS_06_12_2016.Model
 {
     public class Dag : INotifyPropertyChanged
     {
-
-
         public ItemsChangeObservableCollection<TilmeldteHuse> Alletilmeldtehuse { get; set;  }
 
         private TilmeldteHuse hus;
@@ -27,19 +25,9 @@ namespace FS_06_12_2016.Model
         }
 
 
-        public Dag(ItemsChangeObservableCollection<TilmeldteHuse> huse )
-        {
-            Alletilmeldtehuse = huse;
-        }
-
         public Dag()
         {
-                Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
-        }
-
-        public Dag(TilmeldteHuse hus)
-        {
-            
+            Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
         }
 
         public void SetHuseInd()

@@ -11,7 +11,6 @@ namespace FS_06_12_2016.Model
     public class TilmeldteHuse : INotifyPropertyChanged
     {
 
-        //private string dialog;
         private int antalVoksen;
         public int AntalVoksen
         {
@@ -91,7 +90,6 @@ namespace FS_06_12_2016.Model
             return AntalKuverter;
         }
 
-        //private List<Person> personListe;
 
         public double AntalKuverter;
         public TilmeldteHuse(string husnr,int antalvoksne,int antalung,int antalbarn)

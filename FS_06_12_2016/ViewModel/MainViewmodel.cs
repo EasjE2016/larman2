@@ -79,15 +79,12 @@ namespace FS_06_12_2016.ViewModel
         public Uge NyUge { get; set; }
 
         public Dag UgeDag { get; set; }
-        //public TilmeldteHuse hus1;
-        //public Uge uge1;
 
         //private double samletPris;
 
-        //public double SamletPris
-        //{
+        //public double SamletPris {
         //    get { return samletPris; }
-        //    set { samletPris = value; }
+        //    set { samletPris = dag value; }
         //}
 
         private double kuvert;
@@ -255,17 +252,6 @@ namespace FS_06_12_2016.ViewModel
             IndtastUdgiftCommand = new RelayCommand(Beregn);
             OpretEtHus = new RelayCommand(AddNewHus);
 
-            //opretter to nye dag og giver dem hver sin liste
-            //Dag mandag = new Dag(alletilmeldtehuse);
-            //Dag tirsDag = new Dag(alletilmeldtehuse);
-
-            //List<Dag> temp_uge = new List<Dag>();
-
-            //temp_uge.Add(mandag);
-            //temp_uge.Add(tirsDag);
-
-            //this.uge1 = new Uge(temp_uge);
-            //this.SamletPris = uge1.SumKuvertUge();
             NewHus = new TilmeldteHuse();
             NyUge = new Uge();
         }

@@ -101,7 +101,6 @@
     <Compile Include="Model\Dag.cs" />
     <Compile Include="Model\ItemsChangeObservableCollection.cs" />
     <Compile Include="Model\TilmeldteHuse.cs" />
-    <Compile Include="Model\Person.cs" />
     <Compile Include="Model\Uge.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="ViewModel\MainViewModel.cs" />

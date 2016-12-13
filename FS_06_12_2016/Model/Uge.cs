@@ -32,10 +32,6 @@ namespace FS_06_12_2016.Model
 
         public double result;
         public Dag dag;
-        //public Uge(List<Dag> dageiugen)
-        //{
-        //    this.ugedage = dageiugen;
-        //}
 
         public Uge()
         {
