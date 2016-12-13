@@ -26,7 +26,7 @@ namespace FS_06_12_2016.Model
             set
             {
                 udgiftUge = value;
-                OnPropertyChanged(nameof(udgiftUge));
+                OnPropertyChanged(nameof(UdgiftUge));
             }
         }
 

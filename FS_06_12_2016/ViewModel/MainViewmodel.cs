@@ -29,18 +29,49 @@ namespace FS_06_12_2016.ViewModel
             }
         }
 
+        
         //--------------------------------------------------------------------------------
 
         // Tæller hvor mange der deltager på den pågældende dag.
-        private double ialt = 0;
+        private double ialtMandag = 0;
 
-        public double Ialt
+        public double IaltMandag
         {
-            get { return ialt; }
+            get { return ialtMandag; }
             private set
             {
-                ialt = value;
-                OnPropertyChanged(nameof(Ialt));
+                ialtMandag = value;
+                OnPropertyChanged(nameof(IaltMandag));
+            }
+        }
+
+        private double ialtTirsdag = 0;
+
+        public double IaltTirsdag {
+            get { return ialtTirsdag; }
+            private set {
+                ialtTirsdag = value;
+                OnPropertyChanged(nameof(IaltTirsdag));
+            }
+        }
+
+        private double ialtOnsdag = 0;
+
+        public double IaltOnsdag {
+            get { return ialtOnsdag; }
+            private set {
+                ialtOnsdag = value;
+                OnPropertyChanged(nameof(IaltOnsdag));
+            }
+        }
+
+        private double ialtTorsdag = 0;
+
+        public double IaltTorsdag {
+            get { return ialtTorsdag; }
+            private set {
+                ialtTorsdag = value;
+                OnPropertyChanged(nameof(IaltTorsdag));
             }
         }
 
@@ -48,7 +79,7 @@ namespace FS_06_12_2016.ViewModel
         public Uge NyUge { get; set; }
 
         public Dag UgeDag { get; set; }
-        public TilmeldteHuse hus1;
+        //public TilmeldteHuse hus1;
         //public Uge uge1;
 
         //private double samletPris;
@@ -103,43 +134,7 @@ namespace FS_06_12_2016.ViewModel
 
         public RelayCommand OpretEtHus { get; set; }
 
-        public MainViewModel()
-        {
-            Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
-            TilmeldteHuse hus = new TilmeldteHuse();
-
-            OpretUgeCommand = new RelayCommand(LavNyUge);
-            FjernEtHus = new RelayCommand(FjernHusFraDag);
-            IndtastUdgiftCommand = new RelayCommand(Beregn);
-            OpretEtHus = new RelayCommand(AddNewHus);
-            TilmeldteHuse hus1 = new TilmeldteHuse("18", 2, 3, 1);
-            TilmeldteHuse hus2 = new TilmeldteHuse("21", 1, 1, 1);
-            TilmeldteHuse hus3 = new TilmeldteHuse("19", 2, 2, 0);
-
-            Alletilmeldtehuse.Add(hus1);
-            Alletilmeldtehuse.Add(hus2);
-            Alletilmeldtehuse.Add(hus3);
-
-            //opretter to nye dag og giver dem hver sin liste
-            //Dag mandag = new Dag(alletilmeldtehuse);
-            //Dag tirsDag = new Dag(alletilmeldtehuse);
-
-
-
-            List<Dag> temp_uge = new List<Dag>();
-
-            //temp_uge.Add(mandag);
-            //temp_uge.Add(tirsDag);
-
-            //this.uge1 = new Uge(temp_uge);
-            //this.SamletPris = uge1.SumKuvertUge();
-            NewHus = new TilmeldteHuse();
-
-
-            NyUge = new Uge();
-            
-
-        }
+        
 
         public void AddNewHus()
         {
@@ -183,13 +178,29 @@ namespace FS_06_12_2016.ViewModel
                 NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
             }
 
-            IaltiListe();
+            IaltiListeMandag();
+            IaltiListeTirsdag();
+            IaltiListeOnsdag();
+            IaltiListeTorsdag();
         }
-        public void IaltiListe()
+        public void IaltiListeMandag()
         {
+            IaltMandag = NyUge.MandagListe.SumKuvertDag();
+        }
 
-            Ialt = NyUge.MandagListe.SumKuvertDag();
-            //Ialt = NyUge.MandagListe.Alletilmeldtehuse.Count();
+        public void IaltiListeTirsdag()
+        {
+            IaltTirsdag = NyUge.TirsdagListe.SumKuvertDag();
+        }
+
+        public void IaltiListeOnsdag()
+        {
+            IaltOnsdag = NyUge.OnsdagListe.SumKuvertDag();
+        }
+
+        public void IaltiListeTorsdag()
+        {
+            IaltTorsdag = NyUge.TorsDagListe.SumKuvertDag();
         }
         //--------------------------------------
         //Fjern et hus fra listen en bestemt dag.
@@ -199,6 +210,11 @@ namespace FS_06_12_2016.ViewModel
             NyUge.TirsdagListe.Alletilmeldtehuse.Remove(SelectedHus);
             NyUge.OnsdagListe.Alletilmeldtehuse.Remove(SelectedHus);
             NyUge.TorsDagListe.Alletilmeldtehuse.Remove(SelectedHus);
+
+            IaltiListeMandag();
+            IaltiListeTirsdag();
+            IaltiListeOnsdag();
+            IaltiListeTorsdag();
         }
         //--------------------------------------
 
@@ -207,7 +223,6 @@ namespace FS_06_12_2016.ViewModel
             double antal = hus.AntalKuverter;
             double pris = antal * kuvert;
             hus.DagsPris = pris;
-
         }
 
         public void Beregn()
@@ -219,7 +234,44 @@ namespace FS_06_12_2016.ViewModel
                 GetUdgiftPrUgePrHus(hus);
             }
         }
-       
+
+        public MainViewModel()
+        {
+            //TilmeldteHuse hus = new TilmeldteHuse();
+            TilmeldteHuse hus1 = new TilmeldteHuse("18", 2, 3, 1);
+            TilmeldteHuse hus2 = new TilmeldteHuse("19", 2, 2, 0);
+            TilmeldteHuse hus3 = new TilmeldteHuse("20", 1, 1, 1);
+            TilmeldteHuse hus4 = new TilmeldteHuse("21", 4, 0, 0);
+
+            Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
+
+            Alletilmeldtehuse.Add(hus1);
+            Alletilmeldtehuse.Add(hus2);
+            Alletilmeldtehuse.Add(hus3);
+            Alletilmeldtehuse.Add(hus4);
+
+            OpretUgeCommand = new RelayCommand(LavNyUge);
+            FjernEtHus = new RelayCommand(FjernHusFraDag);
+            IndtastUdgiftCommand = new RelayCommand(Beregn);
+            OpretEtHus = new RelayCommand(AddNewHus);
+
+            //opretter to nye dag og giver dem hver sin liste
+            //Dag mandag = new Dag(alletilmeldtehuse);
+            //Dag tirsDag = new Dag(alletilmeldtehuse);
+
+            //List<Dag> temp_uge = new List<Dag>();
+
+            //temp_uge.Add(mandag);
+            //temp_uge.Add(tirsDag);
+
+            //this.uge1 = new Uge(temp_uge);
+            //this.SamletPris = uge1.SumKuvertUge();
+            NewHus = new TilmeldteHuse();
+            NyUge = new Uge();
+        }
+
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

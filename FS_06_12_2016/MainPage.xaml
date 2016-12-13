@@ -12,17 +12,17 @@
     <Page.DataContext>
         <viewModel:MainViewModel/>
     </Page.DataContext>
-<!--///////////////////////////////////////-->
+    <!--///////////////////////////////////////-->
     <SplitView x:Name="SideMenu" DisplayMode="CompactOverlay"  IsPaneOpen="false" 
               CompactPaneLength="60" OpenPaneLength="180">
         <!--Pane er til menu i venstre side -->
         <SplitView.Pane>
-            <StackPanel Background="#FF973535">
+            <StackPanel Background="#FF569BE0">
                 <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
-                    Width="60" Height="60" Background="Transparent" Click="HamburgerButton_Click"/>
+                    Width="60" Height="60" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"/>
                 <StackPanel Orientation="Horizontal">
                     <Button x:Name="MBForside" FontFamily="Segoe MDL2 Assets" Content=""
-                       Width="60" Height="60" Background="Transparent" Click="Forside_Click"/>
+                       Width="60" Height="60" Background="Transparent" Click="Forside_Click" Foreground="White"/>
                     <TextBlock Text="Forside" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
                 <!--<StackPanel Orientation="Horizontal">
@@ -50,30 +50,50 @@
         </SplitView.Pane>
         <!--Content er til siderne til højre -->
         <SplitView.Content>
-            <Grid Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
-                <TextBlock x:Name="textBlockTilmeldte" HorizontalAlignment="Left" Margin="786,403,0,0" TextWrapping="Wrap" Text="Tilmeldte huse:" VerticalAlignment="Top" Height="22" Width="138"/>
-                <ListView x:Name="listViewHuse" HorizontalAlignment="Left" Height="279" Margin="773,430,0,0" VerticalAlignment="Top" Width="354" ItemsSource="{Binding Alletilmeldtehuse, Mode=TwoWay}"  />
-                <TextBox x:Name="textBox" HorizontalAlignment="Left" Header="Udgift for denne uge" Margin="1132,445,0,0" TextWrapping="Wrap" Text="{Binding UdgiftUge, Mode=TwoWay}" VerticalAlignment="Top"/>
-                <Button x:Name="button" Content="Beregn" HorizontalAlignment="Left" Margin="1132,530,0,0" VerticalAlignment="Top" Command="{Binding IndtastUdgiftCommand}"/>
-                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="650,28,0,0" TextWrapping="Wrap" Text="Fællesspisning" VerticalAlignment="Top"/>
-                <TextBlock x:Name="textBlock1" HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" Text="Opret Hus:" VerticalAlignment="Top"/>
-                <ListView x:Name="listViewMandag" HorizontalAlignment="Left" Height="295" Margin="10,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Mandag" ItemsSource="{Binding NyUge.MandagListe.Alletilmeldtehuse, Mode=TwoWay}" SelectedItem="{Binding SelectedHus, Mode=TwoWay}"/>
-                <ListView x:Name="listViewTirsdag" HorizontalAlignment="Left" Height="295" Margin="200,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Tirsdag" ItemsSource="{Binding NyUge.TirsdagListe.Alletilmeldtehuse, Mode=TwoWay}" SelectedItem="{Binding SelectedHus, Mode=TwoWay}"/>
-                <ListView x:Name="listViewOnsdag" HorizontalAlignment="Left" Height="295" Margin="389,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Onsdag" ItemsSource="{Binding NyUge.OnsdagListe.Alletilmeldtehuse, Mode=TwoWay}" SelectedItem="{Binding SelectedHus, Mode=TwoWay}"/>
-                <ListView x:Name="listViewTorsdag" HorizontalAlignment="Left" Height="295" Margin="580,351,0,0" VerticalAlignment="Top" Width="184" BorderBrush="Black" BorderThickness="2,2,2,2" Header="Torsdag" ItemsSource="{Binding NyUge.TorsDagListe.Alletilmeldtehuse}" SelectedItem="{Binding SelectedHus, Mode=TwoWay}"/>
-                <TextBox x:Name="textBoxOpretHusnummer" HorizontalAlignment="Left" Margin="10,74,0,0" TextWrapping="Wrap" Text="{Binding NewHus.HusNr, Mode=TwoWay}" VerticalAlignment="Top" Header="Hus nr:" />
-                <TextBox x:Name="textBoxAntalVoksne" HorizontalAlignment="Left" Margin="86,74,0,0" TextWrapping="Wrap" Text="{Binding NewHus.AntalVoksen, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal Voksne"/>
-                <TextBox x:Name="textBoxAntalUnge" HorizontalAlignment="Left" Margin="177,74,0,0" TextWrapping="Wrap" Text="{Binding NewHus.AntalUng, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal Unge"/>
-                <TextBox x:Name="textBoxAntalBarn" HorizontalAlignment="Left" Margin="257,74,0,0" TextWrapping="Wrap" Text="{Binding NewHus.AntalBarn, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal Børn"/>
-                <Button x:Name="buttonOpretHus" Content="Opret Hus" HorizontalAlignment="Left" Margin="364,102,0,0" VerticalAlignment="Top" Command="{Binding OpretEtHus}" />
-                <Button x:Name="buttonFrameldMandag" Content="Frameld" HorizontalAlignment="Left" Margin="10,674,0,0" VerticalAlignment="Top" Command="{Binding FjernEtHus}" Width="754"/>
-                <Button x:Name="OpretUge" Content="Opret Uge" HorizontalAlignment="Left" Margin="817,347,0,0" VerticalAlignment="Top" Command="{Binding OpretUgeCommand}"/>
-                <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="9,711,0,0" TextWrapping="Wrap" Text="Opdater hus:" VerticalAlignment="Top" FontSize="20" FontWeight="Bold"/>
-                <TextBox x:Name="textBoxopdaterVoksen" HorizontalAlignment="Left" Margin="10,736,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalVoksen, Mode=TwoWay}" VerticalAlignment="Top" Header="Opdater voksen" />
-                <TextBox x:Name="textBoxopdaterUng" HorizontalAlignment="Left" Margin="10,796,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalUng, Mode=TwoWay}" VerticalAlignment="Top" Header="Opdater ung"/>
-                <TextBox x:Name="textBoxopdaterBarn" HorizontalAlignment="Left" Margin="10,856,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalBarn, Mode=TwoWay}" VerticalAlignment="Top" Header="Opdater barn"/>
-                <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,651,0,0" TextWrapping="Wrap" Text="Vælg et hus for at opdatere eller framelde." Width="754" VerticalAlignment="Top" FontWeight="Bold"/>
-                <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="10,291,0,0" TextWrapping="Wrap" Text="{Binding Ialt, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal Kuverter:"/>
+            <Grid Background="#FFBFD6FF">
+                <Border BorderBrush="#FF569BE0" BorderThickness="1" HorizontalAlignment="Left" Height="108" Margin="481,592,0,0" VerticalAlignment="Top" Width="334" CornerRadius="20"/>
+
+
+                <Border BorderBrush="#FF569BE0" BorderThickness="1" HorizontalAlignment="Left" Height="151" Margin="18,592,0,0" VerticalAlignment="Top" Width="436" CornerRadius="20"/>
+
+
+                <ListBox x:Name="listViewHuse" HorizontalAlignment="Left" Height="444" Margin="1105,206,0,0" VerticalAlignment="Top" Width="250" ItemsSource="{Binding Alletilmeldtehuse, Mode=TwoWay}" FontSize="10" Background="{x:Null}" IsSynchronizedWithCurrentItem="{Binding Alletilmeldtehuse.Count, Mode=OneWay}" AutomationProperties.AccessibilityView="Content" ScrollViewer.HorizontalScrollBarVisibility="Auto"  />
+                <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="1114,147,0,0" Text="{Binding UdgiftUge, Mode=TwoWay}" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="White" Padding="6,2,2,2" TextAlignment="Left" FontSize="18" Width="53"/>
+                <Button x:Name="button" Content="Beregn dagspris" HorizontalAlignment="Left" Margin="1185,147,0,0" VerticalAlignment="Top" Command="{Binding IndtastUdgiftCommand}" BorderBrush="#FF569BE0" Foreground="White" Background="#FF569BE0" Width="153" Padding="2" Height="32" FontWeight="Thin" FontSize="16"/>
+                <TextBlock x:Name="textBlock" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="74" FontSize="48" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="0" FontWeight="Thin" Margin="14,17,280,0" Width="1086" TextAlignment="Center">
+                    <Run Text="Fællesspisning Absalon's Have"/>
+                    <Run Text=" -&gt; Uge 51"/>
+                </TextBlock>
+                <ListBox x:Name="listViewMandag" HorizontalAlignment="Left" Height="358" Margin="10,206,0,0" VerticalAlignment="Top" Width="250" BorderThickness="0,0,1,0" ItemsSource="{Binding NyUge.MandagListe.Alletilmeldtehuse, Mode=TwoWay}" SelectedItem="{Binding SelectedHus, Mode=TwoWay}" BorderBrush="#FF569BE0" FontSize="12" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Extended"/>
+                <ListBox x:Name="listViewTirsdag" HorizontalAlignment="Left" Height="358" Margin="290,206,0,0" VerticalAlignment="Top" Width="250" BorderThickness="0,0,1,0" ItemsSource="{Binding NyUge.TirsdagListe.Alletilmeldtehuse, Mode=TwoWay}" SelectedItem="{Binding SelectedHus, Mode=TwoWay}" BorderBrush="#FF569BE0" FontSize="12" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Extended"/>
+                <ListBox x:Name="listViewOnsdag" HorizontalAlignment="Left" Height="358" Margin="569,206,0,0" VerticalAlignment="Top" Width="250" BorderThickness="0,0,1,0" ItemsSource="{Binding NyUge.OnsdagListe.Alletilmeldtehuse, Mode=TwoWay}" SelectedItem="{Binding SelectedHus, Mode=TwoWay}" BorderBrush="#FF569BE0" FontSize="12" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Extended"/>
+                <ListBox x:Name="listViewTorsdag" HorizontalAlignment="Left" Height="358" Margin="850,206,0,0" VerticalAlignment="Top" Width="250" BorderThickness="0,0,1,0" ItemsSource="{Binding NyUge.TorsDagListe.Alletilmeldtehuse}" SelectedItem="{Binding SelectedHus, Mode=TwoWay}" BorderBrush="#FF569BE0" FontSize="12" Background="{x:Null}" ScrollViewer.HorizontalScrollBarVisibility="Auto" SelectionMode="Extended"/>
+                <TextBox x:Name="textBoxOpretHusnummer" HorizontalAlignment="Left" Margin="38,628,0,0" TextWrapping="Wrap" Text="{Binding NewHus.HusNr, Mode=TwoWay}" VerticalAlignment="Top" Header="Hus nr:" Width="90" Height="60" Background="White" BorderBrush="{x:Null}" />
+                <TextBox x:Name="textBoxAntalVoksne" HorizontalAlignment="Left" Margin="138,628,0,0" TextWrapping="Wrap" Text="{Binding NewHus.AntalVoksen, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal voksne" Width="90" Height="60" Background="White" BorderBrush="{x:Null}" PlaceholderText="Voksne" AutomationProperties.IsRequiredForForm="True"/>
+                <TextBox x:Name="textBoxAntalUnge" HorizontalAlignment="Left" Margin="238,628,0,0" TextWrapping="Wrap" Text="{Binding NewHus.AntalUng, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal unge" Width="90" Height="60" Background="White" BorderBrush="{x:Null}"/>
+                <TextBox x:Name="textBoxAntalBarn" HorizontalAlignment="Left" Margin="338,628,0,0" TextWrapping="Wrap" Text="{Binding NewHus.AntalBarn, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal børn" Width="90" Height="60" Background="White" BorderBrush="{x:Null}"/>
+                <Button x:Name="buttonOpretHus" Content="Opret og tilføj til ugen" HorizontalAlignment="Left" Margin="38,697,0,0" VerticalAlignment="Top" Command="{Binding OpretEtHus}" Background="#FF569BE0" Foreground="White" FontWeight="Thin" Width="390" FontSize="16" />
+                <Button x:Name="buttonFrameldMandag" Content="Frameld valgte hus" HorizontalAlignment="Left" Margin="854,656,0,0" VerticalAlignment="Top" Command="{Binding FjernEtHus}" Width="200" Background="#FFE80303" Foreground="White" FontWeight="Thin" FontSize="16" Padding="8,2,8,4"/>
+                <Button x:Name="OpretUge" Content="Indlæs tilmeldte huse" HorizontalAlignment="Left" Margin="854,606,0,0" VerticalAlignment="Top" Command="{Binding OpretUgeCommand}" Foreground="White" FontWeight="Thin" Background="#FF32C36D" Width="200" BorderBrush="{x:Null}" FontSize="16" Padding="8,2,8,4"/>
+                <TextBlock x:Name="textBlock2" HorizontalAlignment="Left" Margin="504,599,0,0" TextWrapping="Wrap" Text="Rediger valgte hus" VerticalAlignment="Top" FontSize="18" Width="292" TextAlignment="Center"/>
+                <TextBox x:Name="textBoxopdaterVoksen" HorizontalAlignment="Left" Margin="504,624,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalVoksen, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal voksen" BorderBrush="{x:Null}" Background="White" BorderThickness="2" Width="90" Height="60" TextAlignment="Center" />
+                <TextBox x:Name="textBoxopdaterUng" HorizontalAlignment="Left" Margin="603,624,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalUng, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal unge" BorderBrush="{x:Null}" Background="White" Width="90" Height="60" TextAlignment="Center"/>
+                <TextBox x:Name="textBoxopdaterBarn" HorizontalAlignment="Left" Margin="706,624,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.AntalBarn, Mode=TwoWay}" VerticalAlignment="Top" Header="Antal børn" BorderBrush="{x:Null}" Background="White" Width="90" Height="60" TextAlignment="Center"/>
+                <TextBlock x:Name="textBlockMandag" HorizontalAlignment="Left" Margin="14,113,0,0" TextWrapping="Wrap" Text="Mandag" VerticalAlignment="Top" TextAlignment="Center" FontSize="18" Height="41" Width="246"/>
+                <TextBlock x:Name="textBlockTirsdag" HorizontalAlignment="Left" Margin="290,113,0,0" TextWrapping="Wrap" Text="Tirsdag" VerticalAlignment="Top" TextAlignment="Center" FontSize="18" Height="41" Width="246"/>
+                <TextBlock x:Name="textBlockOnsdag" HorizontalAlignment="Left" Margin="569,113,0,0" TextWrapping="Wrap" Text="Onsdag" VerticalAlignment="Top" TextAlignment="Center" FontSize="18" Height="41" Width="246"/>
+                <TextBlock x:Name="textBlockTorsdag" HorizontalAlignment="Left" Margin="854,113,0,0" TextWrapping="Wrap" Text="Torsdag" VerticalAlignment="Top" TextAlignment="Center" FontSize="18" Height="41" Width="246"/>
+                <TextBlock x:Name="textBlock2_Copy" HorizontalAlignment="Left" Margin="38,598,0,0" TextWrapping="Wrap" Text="Opret et hus" VerticalAlignment="Top" FontSize="18" Width="390" TextAlignment="Center" Height="25"/>
+                <TextBlock x:Name="textBlockTorsdag_Copy" HorizontalAlignment="Left" Margin="1114,113,0,0" TextWrapping="Wrap" Text="Indtast udgift for denne uge" VerticalAlignment="Top" TextAlignment="Left" FontSize="18" Height="41" Width="246"/>
+                <TextBox x:Name="textBox1" HorizontalAlignment="Left" Margin="14,174,0,0" TextWrapping="Wrap" Text="{Binding IaltMandag, Mode=OneWay}" VerticalAlignment="Top" TextAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" FontSize="18" Padding="0" Width="246"/>
+                <TextBlock x:Name="textBlock3" HorizontalAlignment="Left" Margin="10,147,0,0" TextWrapping="Wrap" Text="Antal kuverter idag" VerticalAlignment="Top" TextAlignment="Center" Width="250"/>
+                <TextBox x:Name="textBox1_Copy" HorizontalAlignment="Left" Margin="290,174,0,0" TextWrapping="Wrap" Text="{Binding IaltTirsdag, Mode=OneWay}" VerticalAlignment="Top" TextAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" FontSize="18" Padding="0" Width="246"/>
+                <TextBlock x:Name="textBlock3_Copy" HorizontalAlignment="Left" Margin="286,147,0,0" TextWrapping="Wrap" Text="Antal kuverter idag" VerticalAlignment="Top" TextAlignment="Center" Width="250"/>
+                <TextBox x:Name="textBox1_Copy1" HorizontalAlignment="Left" Margin="569,174,0,0" TextWrapping="Wrap" Text="{Binding IaltOnsdag, Mode=OneWay}" VerticalAlignment="Top" TextAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" FontSize="18" Padding="0" Width="246"/>
+                <TextBlock x:Name="textBlock3_Copy1" HorizontalAlignment="Left" Margin="565,147,0,0" TextWrapping="Wrap" Text="Antal kuverter idag" VerticalAlignment="Top" TextAlignment="Center" Width="250"/>
+                <TextBox x:Name="textBox1_Copy2" HorizontalAlignment="Left" Margin="854,174,0,0" TextWrapping="Wrap" Text="{Binding IaltTorsdag, Mode=OneWay}" VerticalAlignment="Top" TextAlignment="Center" BorderBrush="{x:Null}" Background="{x:Null}" BorderThickness="0" FontSize="18" Padding="0" Width="246"/>
+                <TextBlock x:Name="textBlock3_Copy2" HorizontalAlignment="Left" Margin="850,147,0,0" TextWrapping="Wrap" Text="Antal kuverter idag" VerticalAlignment="Top" TextAlignment="Center" Width="250"/>
+
 
 
             </Grid>
@@ -85,5 +105,5 @@
     <!--////////////////////////////////-->
 
 
- 
+
 </Page>
