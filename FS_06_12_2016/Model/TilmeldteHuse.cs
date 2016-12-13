@@ -12,52 +12,43 @@ namespace FS_06_12_2016.Model
     {
 
         private int antalVoksen;
-        public int AntalVoksen
-        {
+        public int AntalVoksen {
             get { return antalVoksen; }
-            set
-            {
+            set {
                 antalVoksen = value;
                 OnPropertyChanged(nameof(AntalVoksen));
             }
         }
 
         private int antalUng;
-        public int AntalUng
-        {
+        public int AntalUng {
             get { return antalUng; }
-            set
-            {
+            set {
                 antalUng = value;
                 OnPropertyChanged(nameof(AntalUng));
             }
         }
 
         private int antalBarn;
-        public int AntalBarn
-        {
+        public int AntalBarn {
             get { return antalBarn; }
-            set
-            {
+            set {
                 antalBarn = value;
                 OnPropertyChanged(nameof(AntalBarn));
             }
         }
 
         private double dagsPris;
-        public double DagsPris
-        {
+        public double DagsPris {
             get { return dagsPris; }
-            set
-            {
+            set {
                 dagsPris = value;
                 OnPropertyChanged(nameof(DagsPris));
             }
         }
 
         private string husNr;
-        public string HusNr
-        {
+        public string HusNr {
             get { return husNr; }
             set {
                 {
@@ -67,9 +58,20 @@ namespace FS_06_12_2016.Model
                         MessageDialog();
                 }
 
-                OnPropertyChanged(nameof(HusNr)); 
-                }
+                OnPropertyChanged(nameof(HusNr));
+            }
         }
+
+        private string _minrolle;
+
+        public string MinRolle {
+            get { return _minrolle; }
+            set {
+                _minrolle = value;
+                OnPropertyChanged(nameof(MinRolle));
+            }
+        }
+
 
         /// <summary>
         /// Denne metode aktiverer en besked til brugeren, hvis den indtastede værdi 
@@ -82,35 +84,39 @@ namespace FS_06_12_2016.Model
             await dialog.ShowAsync();
         }
 
-        
+        /// <summary>
+        /// returnere huset antal kuverter
+        /// </summary>
+        /// <returns></returns>
         public double GetAntalKuverter()
         {
             double AntalKuverter;
             AntalKuverter = AntalVoksen + (AntalUng * 0.5) + (AntalBarn * 0.25);
             return AntalKuverter;
         }
-
-
+      
         public double AntalKuverter;
-        public TilmeldteHuse(string husnr,int antalvoksne,int antalung,int antalbarn)
+
+        public TilmeldteHuse(string husnr, int antalvoksne, int antalung, int antalbarn,string minrolle)
         {
             this.husNr = husnr;
             this.AntalVoksen = antalvoksne;
             this.AntalUng = antalung;
             this.AntalBarn = antalbarn;
             this.AntalKuverter = GetAntalKuverter();
+            this.MinRolle = minrolle;
         }
 
         public TilmeldteHuse()
         {
-            
+            this.MinRolle = "Ingen";
         }
 
         public override string ToString()
         {
             return $"Husnummer: {HusNr} \n" +
                    $"Antal Voksne: {AntalVoksen}, unge: {AntalUng} og børn: {AntalBarn}\n" +
-                   $"Dagspris: {DagsPris}";
+                   $"Dagspris: {DagsPris} \n Opgave: {MinRolle}";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

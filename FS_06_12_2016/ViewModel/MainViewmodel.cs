@@ -19,27 +19,23 @@ namespace FS_06_12_2016.ViewModel
         // Gør det muligt at vælge og aktivere hus fra listerne. F.eks opdatere og frameld.
         private TilmeldteHuse selectedHuse;
 
-        public TilmeldteHuse SelectedHus
-        {
+        public TilmeldteHuse SelectedHus {
             get { return selectedHuse; }
-            set
-            {
+            set {
                 selectedHuse = value;
                 OnPropertyChanged(nameof(SelectedHus));
             }
         }
 
-        
+
         //--------------------------------------------------------------------------------
 
         // Tæller hvor mange der deltager på den pågældende dag.
         private double ialtMandag = 0;
 
-        public double IaltMandag
-        {
+        public double IaltMandag {
             get { return ialtMandag; }
-            private set
-            {
+            private set {
                 ialtMandag = value;
                 OnPropertyChanged(nameof(IaltMandag));
             }
@@ -75,6 +71,7 @@ namespace FS_06_12_2016.ViewModel
             }
         }
 
+        Dictionary<int, double> Ugenspris;
 
         public Uge NyUge { get; set; }
 
@@ -89,11 +86,9 @@ namespace FS_06_12_2016.ViewModel
 
         private double kuvert;
 
-        public double Kuvert
-        {
+        public double Kuvert {
             get { return kuvert; }
-            set
-            {
+            set {
                 kuvert = value;
                 OnPropertyChanged(nameof(Kuvert));
             }
@@ -101,11 +96,9 @@ namespace FS_06_12_2016.ViewModel
 
         private double udgiftUge;
 
-        public double UdgiftUge
-        {
+        public double UdgiftUge {
             get { return udgiftUge; }
-            set
-            {
+            set {
                 udgiftUge = value;
                 OnPropertyChanged(nameof(UdgiftUge));
             }
@@ -113,11 +106,9 @@ namespace FS_06_12_2016.ViewModel
 
         private ItemsChangeObservableCollection<TilmeldteHuse> alletilmeldtehuse;
 
-        public ItemsChangeObservableCollection<TilmeldteHuse> Alletilmeldtehuse
-        {
+        public ItemsChangeObservableCollection<TilmeldteHuse> Alletilmeldtehuse {
             get { return alletilmeldtehuse; }
-            set
-            {
+            set {
                 alletilmeldtehuse = value;
                 OnPropertyChanged(nameof(Alletilmeldtehuse));
             }
@@ -131,47 +122,42 @@ namespace FS_06_12_2016.ViewModel
 
         public RelayCommand OpretEtHus { get; set; }
 
-        
-
         public void AddNewHus()
         {
             //TilmeldteHuse hus = new TilmeldteHuse();
             //hus = NewHus;
 
             //kopiere et hus og lægger det ind
-            TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn);
+            TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
             NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-            TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn);
+            TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
             NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
 
-            TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn);
+            TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
             NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
 
-            TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn);
+            TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
             NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
 
             this.alletilmeldtehuse.Add(NewHus);
         }
 
-        /// <summary>
-        /// 
-        /// </summary>
         public void LavNyUge()
         {
             foreach (var hus in alletilmeldtehuse)
             {
                 //kopiere det hus den er nået til på listen
-                TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
                 NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-                TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
                 NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
 
-                TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
                 NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
 
-                TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+                TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
                 NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
             }
 
@@ -225,20 +211,27 @@ namespace FS_06_12_2016.ViewModel
         public void Beregn()
         {
             NyUge.UdgiftUge = this.udgiftUge;
+            //henter ugens kuvert pris
             this.Kuvert = NyUge.GetKuvertPrisUgen();
-            foreach (var hus in Alletilmeldtehuse)
+           
+            // todo: det skal være hver liste hver dag
+            foreach (Dag dag in NyUge.ugedage)
             {
-                GetUdgiftPrUgePrHus(hus);
+                foreach (TilmeldteHuse hus in dag.Alletilmeldtehuse)
+                {
+                    GetUdgiftPrUgePrHus(hus);
+                    Ugenspris.Add(Convert.ToInt32(hus.HusNr), hus.DagsPris);
+                }
             }
-        }
+         }
 
         public MainViewModel()
         {
             //TilmeldteHuse hus = new TilmeldteHuse();
-            TilmeldteHuse hus1 = new TilmeldteHuse("18", 2, 3, 1);
-            TilmeldteHuse hus2 = new TilmeldteHuse("19", 2, 2, 0);
-            TilmeldteHuse hus3 = new TilmeldteHuse("20", 1, 1, 1);
-            TilmeldteHuse hus4 = new TilmeldteHuse("21", 4, 0, 0);
+            TilmeldteHuse hus1 = new TilmeldteHuse("18", 2, 3, 1, "Hjælper");
+            TilmeldteHuse hus2 = new TilmeldteHuse("19", 2, 2, 0, "Oprydder");
+            TilmeldteHuse hus3 = new TilmeldteHuse("20", 1, 1, 1, "Chefkok");
+            TilmeldteHuse hus4 = new TilmeldteHuse("21", 4, 0, 0, "Ingen");
 
             Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
 
@@ -254,6 +247,8 @@ namespace FS_06_12_2016.ViewModel
 
             NewHus = new TilmeldteHuse();
             NyUge = new Uge();
+
+            Ugenspris = new Dictionary<int, double>();
         }
 
 

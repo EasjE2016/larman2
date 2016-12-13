@@ -17,6 +17,7 @@ namespace FS_06_12_2016.Model
         public Dag OnsdagListe { get; set; }
         public Dag TorsDagListe { get; set; }
 
+        
 
         private double udgiftUge;
 
@@ -49,7 +50,7 @@ namespace FS_06_12_2016.Model
         }
 
         /// <summary>
-        /// Giver antallet af kuverter pr uge (18)
+        /// Giver antallet af kuverter pr uge (50 kuverter)
         /// </summary>
         /// <returns></returns>
         public double SumKuvertUge()
@@ -68,7 +69,8 @@ namespace FS_06_12_2016.Model
         /// <returns></returns>
         public double GetKuvertPrisUgen()
         {
-            return UdgiftUge / SumKuvertUge();
+            double result = UdgiftUge / SumKuvertUge();
+            return result;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
