@@ -25,26 +25,11 @@
                        Width="60" Height="60" Background="Transparent" Click="Forside_Click" Foreground="White"/>
                     <TextBlock Text="Forside" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
-                <!--<StackPanel Orientation="Horizontal">
-                    <Button x:Name="MBDag" FontFamily="Segoe MDL2 Assets" Content=""
-                       Width="60" Height="60" Background="Transparent" Click="Dag_Click"/>
-                    <TextBlock Text="Planlæg Dag" FontSize="18" VerticalAlignment="Center" />
-                </StackPanel>
                 <StackPanel Orientation="Horizontal">
-                    <Button x:Name="MBMenu" FontFamily="Segoe MDL2 Assets" Content=""
+                    <Button x:Name="MenuDag" FontFamily="Segoe MDL2 Assets" Content=""
                        Width="60" Height="60" Background="Transparent" Click="Menu_Click"/>
-                    <TextBlock Text="Opret Menu" FontSize="18" VerticalAlignment="Center" />
+                    <TextBlock Text="Menu" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="MBHus" FontFamily="Segoe MDL2 Assets" Content="&#xE10F;"
-                   Width="60" Height="60" Background="Transparent" Click="MBHus_OnClick"  />
-                    <TextBlock Text="Huse" FontSize="18" VerticalAlignment="Center" />
-                </StackPanel>
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="MBPerson" FontFamily="Segoe MDL2 Assets" Content=""
-                       Width="60" Height="60" Background="Transparent" Click="Person_Click"/>
-                    <TextBlock Text="Personer" FontSize="18" VerticalAlignment="Center" />
-                </StackPanel>-->
 
             </StackPanel>
         </SplitView.Pane>

@@ -13,25 +13,26 @@ using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 
-// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=402352&clcid=0x409
+// The Blank Page item template is documented at http://go.microsoft.com/fwlink/?LinkId=234238
 
 namespace FS_06_12_2016
 {
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class MainPage : Page
+    public sealed partial class Menu : Page
     {
-        public MainPage()
+        public Menu()
         {
             this.InitializeComponent();
         }
+
         private void HamburgerButton_Click(object sender, RoutedEventArgs e)
         {
             SideMenu.IsPaneOpen = !SideMenu.IsPaneOpen;
         }
-
         
+
         private void Forside_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(MainPage));
@@ -40,12 +41,6 @@ namespace FS_06_12_2016
         private void Menu_Click(object sender, RoutedEventArgs e)
         {
             this.Frame.Navigate(typeof(Menu));
-        }
-
-
-        private void listViewHuse_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
         }
     }
 }

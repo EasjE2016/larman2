@@ -135,23 +135,23 @@ namespace FS_06_12_2016.ViewModel
 
         public void AddNewHus()
         {
-            TilmeldteHuse hus = new TilmeldteHuse();
-            hus = NewHus;
+            //TilmeldteHuse hus = new TilmeldteHuse();
+            //hus = NewHus;
 
             //kopiere et hus og lægger det ind
-            TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+            TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn);
             NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-            TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+            TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn);
             NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
 
-            TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+            TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn);
             NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
 
-            TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn);
+            TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn);
             NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
 
-            this.alletilmeldtehuse.Add(hus);
+            this.alletilmeldtehuse.Add(NewHus);
         }
 
         /// <summary>

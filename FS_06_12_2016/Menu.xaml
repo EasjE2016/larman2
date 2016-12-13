@@ -1,0 +1,49 @@
+﻿<Page
+    x:Class="FS_06_12_2016.Menu"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:FS_06_12_2016"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:viewModel="using:FS_06_12_2016.ViewModel"
+    mc:Ignorable="d">
+
+    <Page.DataContext>
+        <viewModel:MainViewModel/>
+    </Page.DataContext>
+    <SplitView x:Name="SideMenu" DisplayMode="CompactOverlay"  IsPaneOpen="false" 
+              CompactPaneLength="60" OpenPaneLength="180">
+        <!--Pane er til menu i venstre side -->
+        <SplitView.Pane>
+            <StackPanel Background="#FF569BE0">
+                <Button x:Name="HamburgerButton" FontFamily="Segoe MDL2 Assets" Content="&#xE700;"
+                    Width="60" Height="60" Background="Transparent" Click="HamburgerButton_Click" Foreground="White"/>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MBForside" FontFamily="Segoe MDL2 Assets" Content=""
+                       Width="60" Height="60" Background="Transparent" Click="Forside_Click" Foreground="White"/>
+                    <TextBlock Text="Forside" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                <StackPanel Orientation="Horizontal">
+                    <Button x:Name="MenuDag" FontFamily="Segoe MDL2 Assets" Content=""
+                       Width="60" Height="60" Background="Transparent" Click="Menu_Click"/>
+                    <TextBlock Text="Menu" FontSize="18" VerticalAlignment="Center" />
+                </StackPanel>
+                
+
+            </StackPanel>
+        </SplitView.Pane>
+        <!--Content er til siderne til højre -->
+        <SplitView.Content>
+            <Grid Background="#FFBFD6FF">
+                
+
+               
+
+
+
+
+            </Grid>
+
+        </SplitView.Content>
+    </SplitView>
+</Page>
