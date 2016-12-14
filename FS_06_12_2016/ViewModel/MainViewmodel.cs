@@ -220,7 +220,9 @@ namespace FS_06_12_2016.ViewModel
                 foreach (TilmeldteHuse hus in dag.Alletilmeldtehuse)
                 {
                     GetUdgiftPrUgePrHus(hus);
-                    Ugenspris.Add(Convert.ToInt32(hus.HusNr), hus.DagsPris);
+                    
+                    //todo vi skal løbe listen igennem og regne hvert hus ud
+                    Ugenspris.Add(Convert.ToInt32(hus.HusNr), hus.DagsPris); 
                 }
             }
          }

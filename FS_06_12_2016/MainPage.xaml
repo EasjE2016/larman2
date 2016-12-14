@@ -44,7 +44,7 @@
 
                 <ListBox x:Name="listViewHuse" HorizontalAlignment="Left" Height="444" Margin="1105,206,0,0" VerticalAlignment="Top" Width="250" ItemsSource="{Binding Alletilmeldtehuse, Mode=TwoWay}" FontSize="10" Background="{x:Null}" IsSynchronizedWithCurrentItem="{Binding Alletilmeldtehuse.Count, Mode=OneWay}" AutomationProperties.AccessibilityView="Content" ScrollViewer.HorizontalScrollBarVisibility="Auto"  />
                 <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="1114,147,0,0" Text="{Binding UdgiftUge, Mode=TwoWay}" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="White" Padding="6,2,2,2" TextAlignment="Left" FontSize="18" Width="53"/>
-                <Button x:Name="button" Content="Beregn dagspris" HorizontalAlignment="Left" Margin="1185,147,0,0" VerticalAlignment="Top" Command="{Binding IndtastUdgiftCommand}" BorderBrush="#FF569BE0" Foreground="White" Background="#FF569BE0" Width="153" Padding="2" Height="32" FontWeight="Thin" FontSize="16"/>
+                <Button x:Name="button" Content="Beregn husstandsspris" HorizontalAlignment="Left" Margin="1185,147,0,0" VerticalAlignment="Top" Command="{Binding IndtastUdgiftCommand}" BorderBrush="#FF569BE0" Foreground="White" Background="#FF569BE0" Width="170" Padding="2" Height="32" FontWeight="Thin" FontSize="16"/>
                 <TextBlock x:Name="textBlock" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="74" FontSize="48" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="0" FontWeight="Thin" Margin="14,17,280,0" Width="1086" TextAlignment="Center">
                     <Run Text="Fællesspisning Absalon's Have"/>
                     <Run Text=" -&gt; Uge 51"/>
@@ -80,6 +80,7 @@
                 <TextBlock x:Name="textBlock3_Copy2" HorizontalAlignment="Left" Margin="850,147,0,0" TextWrapping="Wrap" Text="Antal kuverter idag" VerticalAlignment="Top" TextAlignment="Center" Width="250"/>
                 <TextBox x:Name="textBoxAntalOpgave" HorizontalAlignment="Left" Margin="446,628,0,0" TextWrapping="Wrap" Text="{Binding NewHus.MinRolle, Mode=TwoWay}" VerticalAlignment="Top" Header="Opgave" Width="90" Height="60" Background="White" BorderBrush="{x:Null}"/>
                 <TextBox x:Name="textBoxopdaterOpgave" HorizontalAlignment="Left" Margin="942,624,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.MinRolle, Mode=TwoWay}" VerticalAlignment="Top" Header="Opgave" BorderBrush="{x:Null}" Background="White" Width="90" Height="60" TextAlignment="Center"/>
+                <TextBox x:Name="textBox2" HorizontalAlignment="Left" Margin="1131,17,0,0" TextWrapping="Wrap" Text="{Binding GetKuvertPrisUgen, Mode=TwoWay}" VerticalAlignment="Top"/>
 
 
 

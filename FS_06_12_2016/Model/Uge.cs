@@ -17,8 +17,6 @@ namespace FS_06_12_2016.Model
         public Dag OnsdagListe { get; set; }
         public Dag TorsDagListe { get; set; }
 
-        
-
         private double udgiftUge;
 
         public double UdgiftUge

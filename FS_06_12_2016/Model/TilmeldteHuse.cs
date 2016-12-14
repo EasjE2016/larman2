@@ -97,7 +97,7 @@ namespace FS_06_12_2016.Model
       
         public double AntalKuverter;
 
-        public TilmeldteHuse(string husnr, int antalvoksne, int antalung, int antalbarn,string minrolle)
+        public TilmeldteHuse(string husnr, int antalvoksne, int antalung, int antalbarn, string minrolle)
         {
             this.husNr = husnr;
             this.AntalVoksen = antalvoksne;
@@ -116,7 +116,7 @@ namespace FS_06_12_2016.Model
         {
             return $"Husnummer: {HusNr} \n" +
                    $"Antal Voksne: {AntalVoksen}, unge: {AntalUng} og børn: {AntalBarn}\n" +
-                   $"Dagspris: {DagsPris} \n Opgave: {MinRolle}";
+                   $"Dagspris: {DagsPris}, Opgave: {MinRolle}";
         }
 
         public event PropertyChangedEventHandler PropertyChanged;
