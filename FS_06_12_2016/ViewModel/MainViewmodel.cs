@@ -148,25 +148,39 @@ namespace FS_06_12_2016.ViewModel
 
         public RelayCommand OpretEtHus { get; set; }
 
-        public void AddNewHus()
+        public async void AddNewHus()
         {
             //TilmeldteHuse hus = new TilmeldteHuse();
             //hus = NewHus;
+            
+                if (NewHus.HusNr >= 1 && NewHus.AntalVoksen >= 1)
+                {
+                    
+                    //kopiere et hus og lægger det ind
+                    TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
+                    NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-            //kopiere et hus og lægger det ind
-            TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-            NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
+                    TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
+                    NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
 
-            TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-            NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
+                    TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
+                    NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
 
-            TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-            NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
+                    TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
+                    NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
 
-            TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-            NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
+                    this.alletilmeldtehuse.Add(NewHus);
+                }
+                else
+                {
+                    MessageDialog oprethus = new MessageDialog("Du skal huske husnummer og mindst en voksen");
+                    await oprethus.ShowAsync();
+                }
+                
+            
+            
 
-            this.alletilmeldtehuse.Add(NewHus);
+            
         }
 
         public void LavNyUge()
