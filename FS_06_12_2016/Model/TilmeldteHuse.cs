@@ -81,17 +81,7 @@ namespace FS_06_12_2016.Model
             }
         }
 
-        private double husetsSamledeUdgift;
-
-        public double HusetsSamledeUdgift
-        {
-            get { return husetsSamledeUdgift; }
-            set
-            {
-                husetsSamledeUdgift = value;
-                OnPropertyChanged(nameof(HusetsSamledeUdgift));
-            }
-        }
+       
 
 
         public double AntalKuverter;

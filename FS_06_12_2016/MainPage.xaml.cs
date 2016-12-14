@@ -41,11 +41,6 @@ namespace FS_06_12_2016
         {
             this.Frame.Navigate(typeof(Menu));
         }
-
-
-        private void listViewHuse_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-
-        }
+        
     }
 }
