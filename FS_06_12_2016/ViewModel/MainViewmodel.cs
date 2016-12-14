@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using Windows.ApplicationModel.Appointments;
 using FS_06_12_2016.Model;
 using Windows.UI.Popups;
+using System.Data;
+using Windows.UI.Xaml.Controls;
 
 namespace FS_06_12_2016.ViewModel
 {
@@ -19,23 +21,26 @@ namespace FS_06_12_2016.ViewModel
         // Gør det muligt at vælge og aktivere hus fra listerne. F.eks opdatere og frameld.
         private TilmeldteHuse selectedHuse;
 
-        public TilmeldteHuse SelectedHus {
+        public TilmeldteHuse SelectedHus
+        {
             get { return selectedHuse; }
-            set {
+            set
+            {
                 selectedHuse = value;
                 OnPropertyChanged(nameof(SelectedHus));
             }
         }
-
 
         //--------------------------------------------------------------------------------
 
         // Tæller hvor mange der deltager på den pågældende dag.
         private double ialtMandag = 0;
 
-        public double IaltMandag {
+        public double IaltMandag
+        {
             get { return ialtMandag; }
-            private set {
+            private set
+            {
                 ialtMandag = value;
                 OnPropertyChanged(nameof(IaltMandag));
             }
@@ -43,9 +48,11 @@ namespace FS_06_12_2016.ViewModel
 
         private double ialtTirsdag = 0;
 
-        public double IaltTirsdag {
+        public double IaltTirsdag
+        {
             get { return ialtTirsdag; }
-            private set {
+            private set
+            {
                 ialtTirsdag = value;
                 OnPropertyChanged(nameof(IaltTirsdag));
             }
@@ -53,9 +60,11 @@ namespace FS_06_12_2016.ViewModel
 
         private double ialtOnsdag = 0;
 
-        public double IaltOnsdag {
+        public double IaltOnsdag
+        {
             get { return ialtOnsdag; }
-            private set {
+            private set
+            {
                 ialtOnsdag = value;
                 OnPropertyChanged(nameof(IaltOnsdag));
             }
@@ -63,9 +72,11 @@ namespace FS_06_12_2016.ViewModel
 
         private double ialtTorsdag = 0;
 
-        public double IaltTorsdag {
+        public double IaltTorsdag
+        {
             get { return ialtTorsdag; }
-            private set {
+            private set
+            {
                 ialtTorsdag = value;
                 OnPropertyChanged(nameof(IaltTorsdag));
             }
@@ -73,22 +84,30 @@ namespace FS_06_12_2016.ViewModel
 
         Dictionary<int, double> Ugenspris;
 
+        private GridView gW;
+
+        public GridView GW
+        {
+            get { return gW; }
+            set
+            {
+                gW = value;
+                OnPropertyChanged(nameof(GW));
+            }
+        }
+
+
         public Uge NyUge { get; set; }
 
         public Dag UgeDag { get; set; }
 
-        //private double samletPris;
-
-        //public double SamletPris {
-        //    get { return samletPris; }
-        //    set { samletPris = dag value; }
-        //}
-
         private double kuvert;
 
-        public double Kuvert {
+        public double Kuvert
+        {
             get { return kuvert; }
-            set {
+            set
+            {
                 kuvert = value;
                 OnPropertyChanged(nameof(Kuvert));
             }
@@ -96,9 +115,11 @@ namespace FS_06_12_2016.ViewModel
 
         private double udgiftUge;
 
-        public double UdgiftUge {
+        public double UdgiftUge
+        {
             get { return udgiftUge; }
-            set {
+            set
+            {
                 udgiftUge = value;
                 OnPropertyChanged(nameof(UdgiftUge));
             }
@@ -106,13 +127,18 @@ namespace FS_06_12_2016.ViewModel
 
         private ItemsChangeObservableCollection<TilmeldteHuse> alletilmeldtehuse;
 
-        public ItemsChangeObservableCollection<TilmeldteHuse> Alletilmeldtehuse {
+        public ItemsChangeObservableCollection<TilmeldteHuse> Alletilmeldtehuse
+        {
             get { return alletilmeldtehuse; }
-            set {
+            set
+            {
                 alletilmeldtehuse = value;
                 OnPropertyChanged(nameof(Alletilmeldtehuse));
             }
         }
+
+        double result;
+
         public Model.TilmeldteHuse NewHus { get; set; }
         #endregion
 
@@ -166,6 +192,7 @@ namespace FS_06_12_2016.ViewModel
             IaltiListeOnsdag();
             IaltiListeTorsdag();
         }
+
         public void IaltiListeMandag()
         {
             IaltMandag = NyUge.MandagListe.SumKuvertDag();
@@ -213,27 +240,44 @@ namespace FS_06_12_2016.ViewModel
             NyUge.UdgiftUge = this.udgiftUge;
             //henter ugens kuvert pris
             this.Kuvert = NyUge.GetKuvertPrisUgen();
-           
+
             // todo: det skal være hver liste hver dag
             foreach (Dag dag in NyUge.ugedage)
             {
                 foreach (TilmeldteHuse hus in dag.Alletilmeldtehuse)
                 {
                     GetUdgiftPrUgePrHus(hus);
-                    
-                    //todo vi skal løbe listen igennem og regne hvert hus ud
-                    Ugenspris.Add(Convert.ToInt32(hus.HusNr), hus.DagsPris); 
+
+                    //hvis husnummeret ikke er på listen bliver det tilføjet
+                    if (!Ugenspris.ContainsKey(hus.HusNr))
+                    {
+                        //Husnummeret og dagsprisen bliver lagt ind i dictionaryet
+                        Ugenspris.Add(hus.HusNr, hus.DagsPris);
+                    }
+                    else
+                    {
+                        //hvis huset er lagt på listen skla den tage den nuværende value 
+                        //og lægge dagens dagspris til og lægge den tilbage ved den key(husnummer)
+                        this.result = 0;
+                        this.result = Ugenspris[hus.HusNr] + hus.DagsPris;
+                        Ugenspris[hus.HusNr] = result;
+                    }
                 }
             }
-         }
+
+            //Binder ugenspris dictionaryet til et gridview
+            //så vi kan binde/vise det på siden.
+            GW.DataContext = Ugenspris;
+
+        }
 
         public MainViewModel()
         {
             //TilmeldteHuse hus = new TilmeldteHuse();
-            TilmeldteHuse hus1 = new TilmeldteHuse("18", 2, 3, 1, "Hjælper");
-            TilmeldteHuse hus2 = new TilmeldteHuse("19", 2, 2, 0, "Oprydder");
-            TilmeldteHuse hus3 = new TilmeldteHuse("20", 1, 1, 1, "Chefkok");
-            TilmeldteHuse hus4 = new TilmeldteHuse("21", 4, 0, 0, "Ingen");
+            TilmeldteHuse hus1 = new TilmeldteHuse(18, 2, 3, 1, "Hjælper");
+            TilmeldteHuse hus2 = new TilmeldteHuse(19, 2, 2, 0, "Oprydder");
+            TilmeldteHuse hus3 = new TilmeldteHuse(20, 1, 1, 1, "Chefkok");
+            TilmeldteHuse hus4 = new TilmeldteHuse(21, 4, 0, 0, "Ingen");
 
             Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
 
@@ -249,12 +293,10 @@ namespace FS_06_12_2016.ViewModel
 
             NewHus = new TilmeldteHuse();
             NyUge = new Uge();
-
+            GW = new GridView();
             Ugenspris = new Dictionary<int, double>();
+
         }
-
-
-
 
         public event PropertyChangedEventHandler PropertyChanged;
 
