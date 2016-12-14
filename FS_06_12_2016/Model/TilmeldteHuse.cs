@@ -61,6 +61,10 @@ namespace FS_06_12_2016.Model
             get { return husNr; }
             set
             {
+                //if (value < 1)
+                //{
+                //    throw new ArgumentException("Husnummer skal være større end 0");
+                //}
                 {
                     husNr = value;
                 }
