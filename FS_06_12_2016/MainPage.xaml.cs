@@ -37,10 +37,10 @@ namespace FS_06_12_2016
             this.Frame.Navigate(typeof(MainPage));
         }
 
-        private void Menu_Click(object sender, RoutedEventArgs e)
-        {
-            this.Frame.Navigate(typeof(Menu));
-        }
+        //private void Menu_Click(object sender, RoutedEventArgs e)
+        //{
+        //    this.Frame.Navigate(typeof(Menu));
+        //}
         
     }
 }
