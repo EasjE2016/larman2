@@ -90,16 +90,7 @@ namespace FS_06_12_2016.Model
 
         public double AntalKuverter;
 
-        /// <summary>
-        /// Denne metode aktiverer en besked til brugeren, hvis den indtastede værdi 
-        /// ikke stemmer overens med hvad der er tilladt at indtaste.
-        /// </summary>
-        private async void MessageDialog()
-        {
-            var dialog = new MessageDialog("Prøv lige igen.");
-            dialog.Title = "Husnumre må kun bestå af hele positive tal";
-            await dialog.ShowAsync();
-        }
+       
 
         /// <summary>
         /// returnere huset antal kuverter
