@@ -26,6 +26,10 @@ namespace FS_06_12_2016.ViewModel
             get { return selectedHuse; }
             set
             {
+                IaltiListeMandag();
+                IaltiListeTirsdag();
+                IaltiListeOnsdag();
+                IaltiListeTorsdag();
                 selectedHuse = value;
                 OnPropertyChanged(nameof(SelectedHus));
             }
@@ -82,7 +86,7 @@ namespace FS_06_12_2016.ViewModel
             }
         }
 
-        Dictionary<int, double> Ugenspris;
+        public Dictionary<int, double> Ugenspris;
 
         private GridView gW;
 
@@ -122,6 +126,7 @@ namespace FS_06_12_2016.ViewModel
             {
                 udgiftUge = value;
                 OnPropertyChanged(nameof(UdgiftUge));
+                
             }
         }
 
@@ -148,63 +153,95 @@ namespace FS_06_12_2016.ViewModel
 
         public RelayCommand OpretEtHus { get; set; }
 
+        public MainViewModel()
+        {
+            //TilmeldteHuse hus = new TilmeldteHuse();
+            TilmeldteHuse hus1 = new TilmeldteHuse(18, 2, 3, 1, "Hjælper");
+            TilmeldteHuse hus2 = new TilmeldteHuse(19, 2, 2, 0, "Oprydder");
+            TilmeldteHuse hus3 = new TilmeldteHuse(20, 1, 1, 1, "Chefkok");
+            TilmeldteHuse hus4 = new TilmeldteHuse(21, 4, 0, 0, "Ingen");
+
+            Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
+
+            Alletilmeldtehuse.Add(hus1);
+            Alletilmeldtehuse.Add(hus2);
+            Alletilmeldtehuse.Add(hus3);
+            Alletilmeldtehuse.Add(hus4);
+
+            OpretUgeCommand = new RelayCommand(LavNyUge);
+            FjernEtHus = new RelayCommand(FjernHusFraDag);
+            IndtastUdgiftCommand = new RelayCommand(Beregn);
+            OpretEtHus = new RelayCommand(AddNewHus);
+
+            NewHus = new TilmeldteHuse();
+            NyUge = new Uge();
+            GW = new GridView();
+            Ugenspris = new Dictionary<int, double>();
+
+            LavNyUge();
+        }
+
         public async void AddNewHus()
         {
             //TilmeldteHuse hus = new TilmeldteHuse();
             //hus = NewHus;
-            
-                if (NewHus.HusNr >= 1 && NewHus.AntalVoksen >= 1)
-                {
-                    
-                    //kopiere et hus og lægger det ind
-                    TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-                    NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-                    TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-                    NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
-
-                    TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-                    NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
-
-                    TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-                    NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
-
-                    this.alletilmeldtehuse.Add(NewHus);
-                }
-                else
-                {
-                    MessageDialog oprethus = new MessageDialog("Du skal huske husnummer og mindst en voksen");
-                    await oprethus.ShowAsync();
-                }
-                
-            
-            
-
-            
-        }
-
-        public void LavNyUge()
-        {
-            foreach (var hus in alletilmeldtehuse)
+            if (NewHus.HusNr >= 1 && NewHus.AntalVoksen >= 1)
             {
-                //kopiere det hus den er nået til på listen
-                TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
+
+                //kopiere et hus og lægger det ind
+                TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
                 NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-                TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
+                TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
                 NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
 
-                TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
+                TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
                 NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
 
-                TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
+                TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
                 NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
+
+                this.alletilmeldtehuse.Add(NewHus);
+            }
+            else
+            {
+                MessageDialog oprethus = new MessageDialog("Du skal huske husnummer og mindst en voksen");
+                await oprethus.ShowAsync();
             }
 
-            IaltiListeMandag();
-            IaltiListeTirsdag();
-            IaltiListeOnsdag();
-            IaltiListeTorsdag();
+
+
+
+
+        }
+
+        public async void LavNyUge()
+        {
+            
+                foreach (var hus in alletilmeldtehuse)
+                {
+                    //kopiere det hus den er nået til på listen
+                    TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
+                    NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
+
+                    TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
+                    NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
+
+                    TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
+                    NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
+
+                    TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, NewHus.MinRolle);
+                    NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
+                }
+
+                IaltiListeMandag();
+                IaltiListeTirsdag();
+                IaltiListeOnsdag();
+                IaltiListeTorsdag();
+
+           
+            
         }
 
         public void IaltiListeMandag()
@@ -249,68 +286,52 @@ namespace FS_06_12_2016.ViewModel
             hus.DagsPris = pris;
         }
 
-        public void Beregn()
+        public async void Beregn()
         {
-            NyUge.UdgiftUge = this.udgiftUge;
-            //henter ugens kuvert pris
-            this.Kuvert = NyUge.GetKuvertPrisUgen();
-
-            // todo: det skal være hver liste hver dag
-            foreach (Dag dag in NyUge.ugedage)
+            if (udgiftUge >= 1)
             {
-                foreach (TilmeldteHuse hus in dag.Alletilmeldtehuse)
-                {
-                    GetUdgiftPrUgePrHus(hus);
+                NyUge.UdgiftUge = this.udgiftUge;
+                //henter ugens kuvert pris
+                this.Kuvert = NyUge.GetKuvertPrisUgen();
 
-                    //hvis husnummeret ikke er på listen bliver det tilføjet
-                    if (!Ugenspris.ContainsKey(hus.HusNr))
+                // todo: det skal være hver liste hver dag
+                foreach (Dag dag in NyUge.ugedage)
+                {
+                    foreach (TilmeldteHuse hus in dag.Alletilmeldtehuse)
                     {
-                        //Husnummeret og dagsprisen bliver lagt ind i dictionaryet
-                        Ugenspris.Add(hus.HusNr, hus.DagsPris);
-                    }
-                    else
-                    {
-                        //hvis huset er lagt på listen skla den tage den nuværende value 
-                        //og lægge dagens dagspris til og lægge den tilbage ved den key(husnummer)
-                        this.result = 0;
-                        this.result = Ugenspris[hus.HusNr] + hus.DagsPris;
-                        Ugenspris[hus.HusNr] = result;
+                        GetUdgiftPrUgePrHus(hus);
+
+                        //hvis husnummeret ikke er på listen bliver det tilføjet
+                        if (!Ugenspris.ContainsKey(hus.HusNr))
+                        {
+                            //Husnummeret og dagsprisen bliver lagt ind i dictionaryet
+                            Ugenspris.Add(hus.HusNr, hus.DagsPris);
+                        }
+                        else
+                        {
+                            //hvis huset er lagt på listen skla den tage den nuværende value 
+                            //og lægge dagens dagspris til og lægge den tilbage ved den key(husnummer)
+                            this.result = 0;
+                            this.result = Ugenspris[hus.HusNr] + hus.DagsPris;
+                            Ugenspris[hus.HusNr] = result;
+                        }
                     }
                 }
+
+                //Binder ugenspris dictionaryet til et gridview
+                //så vi kan binde/vise det på siden.
+                GW.DataContext = Ugenspris;
             }
-
-            //Binder ugenspris dictionaryet til et gridview
-            //så vi kan binde/vise det på siden.
-            GW.DataContext = Ugenspris;
-
-        }
-
-        public MainViewModel()
-        {
-            //TilmeldteHuse hus = new TilmeldteHuse();
-            TilmeldteHuse hus1 = new TilmeldteHuse(18, 2, 3, 1, "Hjælper");
-            TilmeldteHuse hus2 = new TilmeldteHuse(19, 2, 2, 0, "Oprydder");
-            TilmeldteHuse hus3 = new TilmeldteHuse(20, 1, 1, 1, "Chefkok");
-            TilmeldteHuse hus4 = new TilmeldteHuse(21, 4, 0, 0, "Ingen");
-
-            Alletilmeldtehuse = new ItemsChangeObservableCollection<TilmeldteHuse>();
-
-            Alletilmeldtehuse.Add(hus1);
-            Alletilmeldtehuse.Add(hus2);
-            Alletilmeldtehuse.Add(hus3);
-            Alletilmeldtehuse.Add(hus4);
-
-            OpretUgeCommand = new RelayCommand(LavNyUge);
-            FjernEtHus = new RelayCommand(FjernHusFraDag);
-            IndtastUdgiftCommand = new RelayCommand(Beregn);
-            OpretEtHus = new RelayCommand(AddNewHus);
-
-            NewHus = new TilmeldteHuse();
-            NyUge = new Uge();
-            GW = new GridView();
-            Ugenspris = new Dictionary<int, double>();
+            else
+            {
+                MessageDialog info = new MessageDialog("Indtast et positivt beløb!");
+                await info.ShowAsync();
+            }
+           
 
         }
+
+
 
         public event PropertyChangedEventHandler PropertyChanged;
 

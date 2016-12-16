@@ -25,11 +25,11 @@
                        Width="60" Height="60" Background="Transparent" Click="Forside_Click" Foreground="White"/>
                     <TextBlock Text="Forside" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
-                <StackPanel Orientation="Horizontal">
+                <!--<StackPanel Orientation="Horizontal">
                     <Button x:Name="MenuDag" FontFamily="Segoe MDL2 Assets" Content=""
                        Width="60" Height="60" Background="Transparent" Click="Menu_Click"/>
                     <TextBlock Text="Menu" FontSize="18" VerticalAlignment="Center" />
-                </StackPanel>
+                </StackPanel>-->
 
             </StackPanel>
         </SplitView.Pane>
@@ -85,7 +85,7 @@
                         <TextBlock x:Name="textBlock3_Copy2" HorizontalAlignment="Left" Margin="916,130,0,0" TextWrapping="Wrap" Text="Antal kuverter idag" VerticalAlignment="Top" TextAlignment="Center" Width="250"/>
                         <TextBox x:Name="textBoxAntalOpgave" HorizontalAlignment="Left" Margin="512,611,0,0" TextWrapping="Wrap" Text="{Binding NewHus.MinRolle, Mode=TwoWay}" VerticalAlignment="Top" Header="Opgave" Width="90" Height="60" Background="White" BorderBrush="{x:Null}"/>
                         <TextBox x:Name="textBoxopdaterOpgave" HorizontalAlignment="Left" Margin="1008,607,0,0" TextWrapping="Wrap" Text="{Binding SelectedHus.MinRolle, Mode=TwoWay}" VerticalAlignment="Top" Header="Opgave" BorderBrush="{x:Null}" Background="White" Width="90" Height="60" TextAlignment="Center"/>
-                        <GridView x:Name="gridView" HorizontalAlignment="Left" Margin="1180,189,0,0" VerticalAlignment="Top" Width="224" Height="358" ItemsSource="{Binding GW.DataContext, Mode=TwoWay}"/>
+                        <GridView x:Name="gridView" HorizontalAlignment="Left" Margin="1180,189,0,0" VerticalAlignment="Top" Width="224" Height="358" ItemsSource="{Binding GW.DataContext, Mode=TwoWay, UpdateSourceTrigger=Default}"/>
 
 
 
