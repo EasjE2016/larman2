@@ -32,7 +32,6 @@ namespace UnitTestTilmeldteHuse
             try
             {
                 Tilmeldtehuse.HusNr = 1;
-                
             }
             catch (Exception)
             {

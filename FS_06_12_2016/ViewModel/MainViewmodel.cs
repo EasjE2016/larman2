@@ -178,7 +178,7 @@ namespace FS_06_12_2016.ViewModel
             GW = new GridView();
             Ugenspris = new Dictionary<int, double>();
 
-            LavNyUge();
+            
         }
 
         public async void AddNewHus()
