@@ -7,7 +7,7 @@ using System.Windows.Input;
 
 namespace FS_06_12_2016.ViewModel
 {
-    class RelayCommand : ICommand
+   public class RelayCommand : ICommand
     {
         private readonly Action execute;
 
