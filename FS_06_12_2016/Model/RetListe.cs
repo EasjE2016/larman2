@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FS_06_12_2016.Model
 {
-    class RetListe : ObservableCollection<Retter>
+    public class RetListe : ObservableCollection<Retter>
     {
         public RetListe()
         {
