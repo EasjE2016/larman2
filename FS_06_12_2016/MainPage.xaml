@@ -43,7 +43,7 @@
 
                         <Border BorderBrush="#FF569BE0" BorderThickness="1" HorizontalAlignment="Left" Height="151" Margin="84,575,0,0" VerticalAlignment="Top" Width="544" CornerRadius="20"/>
                         <TextBox x:Name="textBox" HorizontalAlignment="Left" Margin="1180,130,0,0" Text="{Binding UdgiftUge, Mode=TwoWay}" VerticalAlignment="Top" BorderBrush="{x:Null}" Background="White" Padding="6,2,2,2" TextAlignment="Left" FontSize="18" Width="53"/>
-                        <Button x:Name="button" Content="Beregn dagspris" HorizontalAlignment="Left" Margin="1251,130,0,0" VerticalAlignment="Top" Command="{Binding IndtastUdgiftCommand}" BorderBrush="#FF569BE0" Foreground="White" Background="#FF569BE0" Width="153" Padding="2" Height="32" FontWeight="Thin" FontSize="16"/>
+                        <Button x:Name="button" Content="Beregn" HorizontalAlignment="Left" Margin="1251,130,0,0" VerticalAlignment="Top" Command="{Binding IndtastUdgiftCommand}" BorderBrush="#FF569BE0" Foreground="White" Background="#FF569BE0" Width="153" Padding="2" Height="32" FontWeight="Thin" FontSize="16"/>
                         <TextBlock x:Name="textBlock" HorizontalAlignment="Center" TextWrapping="Wrap" VerticalAlignment="Top" Height="74" FontSize="48" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" Padding="0" FontWeight="Thin" Margin="0,-47,340,0" Width="1086" TextAlignment="Center">
                             <Run Text="Fællesspisning Absalon's Have"/>
                             <Run Text=" -&gt; Uge 51"/>

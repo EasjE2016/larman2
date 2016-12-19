@@ -297,7 +297,7 @@ namespace FS_06_12_2016.ViewModel
                 await oprethus.ShowAsync();
             }
 
-
+            
 
 
 
@@ -375,6 +375,7 @@ namespace FS_06_12_2016.ViewModel
         public void IaltDagensRetMandag()
         {
             IaltPaaDagen = IaltMandag * SelectedRet.PrisPrKuvert;
+            
         }
         //public void IaltDagensRetTirsdag()
         //{
@@ -384,6 +385,11 @@ namespace FS_06_12_2016.ViewModel
         public void IaltiListeMandag()
         {
             IaltMandag = NyUge.MandagListe.SumKuvertDag();
+            
+
+
+
+
         }
 
         public void IaltiListeTirsdag()
