@@ -28,16 +28,26 @@
                        Width="60" Height="60" Background="Transparent" Click="Menu_Click"/>
                     <TextBlock Text="Menu" FontSize="18" VerticalAlignment="Center" />
                 </StackPanel>
-                
+
 
             </StackPanel>
         </SplitView.Pane>
         <!--Content er til siderne til højre -->
         <SplitView.Content>
             <Grid Background="#FFBFD6FF">
-                
+                <ListView x:Name="listViewMenu" HorizontalAlignment="Left" Height="997" Margin="26,10,0,0" VerticalAlignment="Top" Width="623" ItemsSource="{Binding RetListen}" SelectedItem="{Binding SelectedRet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
+                <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="698,10,0,0" TextWrapping="Wrap" Text="{Binding SelectedRet}" VerticalAlignment="Top" Height="467" Width="582"/>
+                <TextBox x:Name="textBoxMandagKuvert" HorizontalAlignment="Left" Margin="1335,72,0,0" TextWrapping="Wrap" Text="{Binding IaltMandag, Mode=TwoWay}" VerticalAlignment="Top" Height="80" Width="208" Header="Kuverter mandag"/>
+                <TextBox x:Name="textBoxMandagUdgift" HorizontalAlignment="Left" Margin="1584,72,0,0" TextWrapping="Wrap" Text="{Binding IaltPaaDagen, Mode=TwoWay}" VerticalAlignment="Top" Width="167" Header="Udgift for dagen." Height="80" IsReadOnly="True"/>
+                <TextBox x:Name="textBoxTorsdagKuvert" HorizontalAlignment="Left" Margin="1335,316,0,0" TextWrapping="Wrap" Text="{Binding IaltTorsdag, Mode=OneWay}" VerticalAlignment="Top" Height="80" Width="208" Header="Kuverter torsdag" IsReadOnly="True"/>
+                <TextBox x:Name="textBoxTorsdagUdgift" HorizontalAlignment="Left" Margin="1584,316,0,0" TextWrapping="Wrap" Text="{Binding IaltPaaDagen, Mode=TwoWay}" VerticalAlignment="Top" Width="167" Header="Udgift for dagen." Height="80" IsReadOnly="True"/>
+                <TextBox x:Name="textBoxOnsdagKuvert" HorizontalAlignment="Left" Margin="1335,234,0,0" TextWrapping="Wrap" Text="{Binding IaltOnsdag, Mode=OneWay}" VerticalAlignment="Top" Height="80" Width="208" Header="Kuverter onsdag" IsReadOnly="True"/>
+                <TextBox x:Name="textBoxOnsdagUdgift" HorizontalAlignment="Left" Margin="1584,234,0,0" TextWrapping="Wrap" Text="{Binding IaltPaaDagen, Mode=TwoWay}" VerticalAlignment="Top" Width="167" Header="Udgift for dagen." Height="80" IsReadOnly="True"/>
+                <TextBox x:Name="textBoxTirsdagKuvert" HorizontalAlignment="Left" Margin="1335,152,0,0" TextWrapping="Wrap" Text="{Binding IaltTirsdag, Mode=OneWay}" VerticalAlignment="Top" Height="80" Width="208" Header="Kuverter tirsdag" IsReadOnly="True"/>
+                <TextBox x:Name="textBoxTirsdagUdgift" HorizontalAlignment="Left" Margin="1584,152,0,0" TextWrapping="Wrap" Text="{Binding IaltPaaDagen, Mode=TwoWay}" VerticalAlignment="Top" Width="167" Header="Udgift for dagen." Height="80" IsReadOnly="True"/>
 
-               
+
+
 
 
 

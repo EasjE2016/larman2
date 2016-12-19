@@ -31,7 +31,7 @@ namespace FS_06_12_2016
         {
             SideMenu.IsPaneOpen = !SideMenu.IsPaneOpen;
         }
-        
+
 
         private void Forside_Click(object sender, RoutedEventArgs e)
         {
