@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace FS_06_12_2016.ViewModel
 {
-  public  class MainViewModel : INotifyPropertyChanged
+  class MainViewModel : INotifyPropertyChanged
     {
         #region Properties
         //------------------------------------------------------------------------------
@@ -166,7 +166,7 @@ namespace FS_06_12_2016.ViewModel
                 IaltDagensRetMandag();
             }
         }
-        // Til forsiden ran´dom menuer
+        // Til forsiden random menuer
         private string _visesHerMandag;
 
         public string VisesHerMandag
@@ -213,6 +213,8 @@ namespace FS_06_12_2016.ViewModel
                 OnPropertyChanged(nameof(VisesHerTorsdag));
             }
         }
+        // Random memuer slut
+
         private double ialtPaaDagen = 0;
 
         public double IaltPaaDagen
@@ -245,6 +247,7 @@ namespace FS_06_12_2016.ViewModel
             Alletilmeldtehuse.Add(hus2);
             Alletilmeldtehuse.Add(hus3);
             Alletilmeldtehuse.Add(hus4);
+            
 
             OpretUgeCommand = new RelayCommand(LavNyUge);
             FjernEtHus = new RelayCommand(FjernHusFraDag);
@@ -335,7 +338,7 @@ namespace FS_06_12_2016.ViewModel
         public void VisRandomMenuMandag()
         {
             Random rnd = new Random();
-            string[] madretter = { "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havre Grød", "Oksegryde med bagte kartofler", "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
+            string[] madretter = { "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havregrød", "Oksegryde med bagte kartofler", "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
 
 
             int mIndex = rnd.Next(0, madretter.Length);
@@ -345,7 +348,7 @@ namespace FS_06_12_2016.ViewModel
         public void VisRandomMenuOnsdag()
         {
             Random rnd = new Random();
-            string[] madretterTirsdag = { "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havre Grød", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
+            string[] madretterTirsdag = { "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havregrød", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
 
             int tIndex = rnd.Next(0, madretterTirsdag.Length);
 
@@ -354,7 +357,7 @@ namespace FS_06_12_2016.ViewModel
         public void VisRandomMenuTorsdag()
         {
             Random rnd = new Random();
-            string[] madretter = { "Rugbrød", "Havre Grød", "Pølser med grove fritter og urtemayonnaise", "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
+            string[] madretter = { "Rugbrød", "Havregrød", "Pølser med grove fritter og urtemayonnaise", "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
 
 
             int mIndex = rnd.Next(0, madretter.Length);
@@ -364,7 +367,7 @@ namespace FS_06_12_2016.ViewModel
         public void VisRandomMenuTirsdag()
         {
             Random rnd = new Random();
-            string[] madretterTirsdag = { "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havre Grød", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker", "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs" };
+            string[] madretterTirsdag = { "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havregrød", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker", "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs" };
 
             int tIndex = rnd.Next(1, madretterTirsdag.Length);
 
@@ -377,10 +380,6 @@ namespace FS_06_12_2016.ViewModel
         {
             IaltPaaDagen = IaltMandag * SelectedRet.PrisPrKuvert;
         }
-        //public void IaltDagensRetTirsdag()
-        //{
-        //    IaltPaaDagen = IaltTirsdag * SelectedRet.PrisPrKuvert;
-        //}
        
         public void IaltiListeMandag()
         {
