@@ -146,6 +146,84 @@ namespace FS_06_12_2016.ViewModel
 
         public Model.TilmeldteHuse NewHus { get; set; }
         #endregion
+        //------MENU--SIDE-------------------
+        public Model.RetListe RetListen { get; set; }
+
+
+        private Retter _selectedret;
+
+        public Retter SelectedRet
+        {
+            get
+            {
+                return _selectedret;
+
+            }
+            set
+            {
+                _selectedret = value;
+                OnPropertyChanged(nameof(SelectedRet));
+                IaltDagensRetMandag();
+            }
+        }
+        // Til forsiden ran´dom menuer
+        private string _visesHerMandag;
+
+        public string VisesHerMandag
+        {
+            get { return _visesHerMandag; }
+            set
+            {
+                _visesHerMandag = value;
+                OnPropertyChanged(nameof(VisesHerMandag));
+            }
+        }
+
+        private string _visesHerTirsdag;
+
+        public string VisesHerTirsdag
+        {
+            get { return _visesHerTirsdag; }
+            set
+            {
+                _visesHerTirsdag = value;
+                OnPropertyChanged(nameof(VisesHerTirsdag));
+            }
+        }
+
+        private string _visesHerOnsdag;
+
+        public string VisesHerOnsdag
+        {
+            get { return _visesHerOnsdag; }
+            set
+            {
+                _visesHerOnsdag = value;
+                OnPropertyChanged(nameof(VisesHerOnsdag));
+            }
+        }
+        private string _visesHerTorsdag;
+
+        public string VisesHerTorsdag
+        {
+            get { return _visesHerTorsdag; }
+            set
+            {
+                _visesHerTorsdag = value;
+                OnPropertyChanged(nameof(VisesHerTorsdag));
+            }
+        }
+        private double ialtPaaDagen = 0;
+
+        public double IaltPaaDagen
+        {
+            get { return ialtPaaDagen; }
+            set
+            {
+                ialtPaaDagen = value;
+                OnPropertyChanged(nameof(IaltPaaDagen));
+            }
+        }
 
         public RelayCommand IndtastUdgiftCommand { get; set; }
         public RelayCommand OpretUgeCommand { get; set; }
@@ -178,7 +256,16 @@ namespace FS_06_12_2016.ViewModel
             GW = new GridView();
             Ugenspris = new Dictionary<int, double>();
 
-            
+            RetListen = new RetListe();
+            _selectedret = new Retter();
+
+            LavNyUge();
+
+            VisRandomMenuMandag();
+            VisRandomMenuTirsdag();
+            VisRandomMenuOnsdag();
+            VisRandomMenuTorsdag();
+
         }
 
         public async void AddNewHus()
@@ -243,7 +330,57 @@ namespace FS_06_12_2016.ViewModel
            
             
         }
+        // Skal vise random menuer på forsiden
+        public void VisRandomMenuMandag()
+        {
+            Random rnd = new Random();
+            string[] madretter = { "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havre Grød", "Oksegryde med bagte kartofler", "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
 
+
+            int mIndex = rnd.Next(0, madretter.Length);
+
+            VisesHerMandag = madretter[mIndex];
+        }
+        public void VisRandomMenuOnsdag()
+        {
+            Random rnd = new Random();
+            string[] madretterTirsdag = { "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havre Grød", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
+
+            int tIndex = rnd.Next(0, madretterTirsdag.Length);
+
+            VisesHerTirsdag = madretterTirsdag[tIndex];
+        }
+        public void VisRandomMenuTorsdag()
+        {
+            Random rnd = new Random();
+            string[] madretter = { "Rugbrød", "Havre Grød", "Pølser med grove fritter og urtemayonnaise", "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker" };
+
+
+            int mIndex = rnd.Next(0, madretter.Length);
+
+            VisesHerOnsdag = madretter[mIndex];
+        }
+        public void VisRandomMenuTirsdag()
+        {
+            Random rnd = new Random();
+            string[] madretterTirsdag = { "Jamie Oliver Gryde", "Hjemmelavede Burgere", "Rugbrød", "Havre Grød", "Oksegryde med bagte kartofler", "Squash, tomat og oksekød i fad", "Andesteg med æbler og svesker", "Pølser med grove fritter og urtemayonnaise", "Juleand", "Kålsalat med nudler og thaidressing", "Kalvekød på spyd", "Asiatisk nudelsalat med pulled pork", "Kanin med svesker", "Roastbeef med pasta og tomatsovs" };
+
+            int tIndex = rnd.Next(1, madretterTirsdag.Length);
+
+            VisesHerTorsdag = madretterTirsdag[tIndex];
+        }
+
+
+        // Regner dagens pris ud afhængig af menu kuverrt prisen.
+        public void IaltDagensRetMandag()
+        {
+            IaltPaaDagen = IaltMandag * SelectedRet.PrisPrKuvert;
+        }
+        //public void IaltDagensRetTirsdag()
+        //{
+        //    IaltPaaDagen = IaltTirsdag * SelectedRet.PrisPrKuvert;
+        //}
+       
         public void IaltiListeMandag()
         {
             IaltMandag = NyUge.MandagListe.SumKuvertDag();
