@@ -1,7 +1,7 @@
 ﻿using System;
 using FS_06_12_2016.Model;
+using FS_06_12_2016.ViewModel;
 using Microsoft.VisualStudio.TestPlatform.UnitTestFramework;
-
 
 namespace UnitTestTilmeldteHuse
 {
@@ -9,54 +9,14 @@ namespace UnitTestTilmeldteHuse
     public class UnitTest1
     {
         [TestMethod]
-        public void TestMethod1()
+        public void GetAntalKuverterTest()
         {
-            TilmeldteHuse Tilmeldtehuse = new TilmeldteHuse();
-            try
-            {
-                Tilmeldtehuse.HusNr = -2;
-                Assert.Fail();
-            }
-            catch (Exception)
-            {
-                //ok
-                //Assert.AreEqual("Husnummer skal være større end 0", ex.Message);
-               
-            }
+            TilmeldteHuse hus = new TilmeldteHuse(1,1,2,4,"Test");
+            //voksne fuld pris, unge ½, børn kvart pris
+            // Forventet resultat er derfor 1+1+1 = 3
+            Assert.AreEqual(hus.GetAntalKuverter(),3);
+
         }
-
-        [TestMethod]
-        public void TestMethod2()
-        {
-            TilmeldteHuse Tilmeldtehuse = new TilmeldteHuse();
-            try
-            {
-                Tilmeldtehuse.HusNr = 1;
-            }
-            catch (Exception)
-            {
-                Assert.Fail();
-
-            }
-        }
-
-        //[TestMethod]
-        //public void TestMethod3()
-        //{
-        //    TilmeldteHuse Tilmeldtehuse = new TilmeldteHuse();
-        //    try
-        //    {
-        //        Tilmeldtehuse.HusNr = 1;
-
-        //    }
-        //    catch (Exception)
-        //    {
-        //        Assert.Fail();
-
-        //    }
-        //}
-
-
 
     }
 }

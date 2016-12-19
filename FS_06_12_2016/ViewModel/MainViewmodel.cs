@@ -14,7 +14,7 @@ using Windows.UI.Xaml.Controls;
 
 namespace FS_06_12_2016.ViewModel
 {
-    class MainViewModel : INotifyPropertyChanged
+  public  class MainViewModel : INotifyPropertyChanged
     {
         #region Properties
         //------------------------------------------------------------------------------
@@ -126,7 +126,7 @@ namespace FS_06_12_2016.ViewModel
             {
                 udgiftUge = value;
                 OnPropertyChanged(nameof(UdgiftUge));
-                
+
             }
         }
 
@@ -266,66 +266,67 @@ namespace FS_06_12_2016.ViewModel
             VisRandomMenuOnsdag();
             VisRandomMenuTorsdag();
 
+
         }
 
         public async void AddNewHus()
         {
-            //TilmeldteHuse hus = new TilmeldteHuse();
-            //hus = NewHus;
-
-            if (NewHus.HusNr >= 1 && NewHus.AntalVoksen >= 1)
+            try
             {
 
-                //kopiere et hus og lægger det ind
-                TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-                NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
+                if (NewHus.HusNr >= 1 && NewHus.AntalVoksen >= 1)
+                {
+                    //kopiere et hus og lægger det ind
+                    TilmeldteHuse mandag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
+                    NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-                TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-                NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
+                    TilmeldteHuse tirsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
+                    NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
 
-                TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-                NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
+                    TilmeldteHuse onsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
+                    NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
 
-                TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
-                NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
+                    TilmeldteHuse torsdag_hus = new TilmeldteHuse(NewHus.HusNr, NewHus.AntalVoksen, NewHus.AntalUng, NewHus.AntalBarn, NewHus.MinRolle);
+                    NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
 
-                this.alletilmeldtehuse.Add(NewHus);
+                    this.alletilmeldtehuse.Add(NewHus);
+                }
+                else
+                {
+                    throw new ArgumentException("HusNr må ikke være mindre end 1");
+                }
             }
-            else
+            catch (ArgumentException)
             {
+
                 MessageDialog oprethus = new MessageDialog("Du skal huske husnummer og mindst en voksen");
                 await oprethus.ShowAsync();
             }
-
-            
-
-
-
         }
 
         public void LavNyUge()
         {
-            
-                foreach (var hus in alletilmeldtehuse)
-                {
-                    //kopiere det hus den er nået til på listen
-                    TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
-                    NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-                    TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
-                    NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
+            foreach (var hus in alletilmeldtehuse)
+            {
+                //kopiere det hus den er nået til på listen
+                TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
+                NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-                    TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
-                    NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
+                TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
+                NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
 
-                    TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
-                    NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
-                }
+                TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
+                NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
 
-                IaltiListeMandag();
-                IaltiListeTirsdag();
-                IaltiListeOnsdag();
-                IaltiListeTorsdag();
+                TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
+                NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
+            }
+
+            IaltiListeMandag();
+            IaltiListeTirsdag();
+            IaltiListeOnsdag();
+            IaltiListeTorsdag();
 
            
             
@@ -375,7 +376,6 @@ namespace FS_06_12_2016.ViewModel
         public void IaltDagensRetMandag()
         {
             IaltPaaDagen = IaltMandag * SelectedRet.PrisPrKuvert;
-            
         }
         //public void IaltDagensRetTirsdag()
         //{
@@ -385,11 +385,6 @@ namespace FS_06_12_2016.ViewModel
         public void IaltiListeMandag()
         {
             IaltMandag = NyUge.MandagListe.SumKuvertDag();
-            
-
-
-
-
         }
 
         public void IaltiListeTirsdag()
@@ -470,7 +465,7 @@ namespace FS_06_12_2016.ViewModel
                 MessageDialog info = new MessageDialog("Indtast et positivt beløb!");
                 await info.ShowAsync();
             }
-           
+
 
         }
 
