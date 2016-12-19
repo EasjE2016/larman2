@@ -10,6 +10,7 @@ using Windows.ApplicationModel.Appointments;
 using FS_06_12_2016.Model;
 using Windows.UI.Popups;
 using System.Data;
+using Windows.UI.Composition.Effects;
 using Windows.UI.Xaml.Controls;
 
 namespace FS_06_12_2016.ViewModel
@@ -213,7 +214,7 @@ namespace FS_06_12_2016.ViewModel
                 OnPropertyChanged(nameof(VisesHerTorsdag));
             }
         }
-        // Random memuer slut
+        // Random menuer slut
 
         private double ialtPaaDagen = 0;
 
@@ -226,6 +227,7 @@ namespace FS_06_12_2016.ViewModel
                 OnPropertyChanged(nameof(IaltPaaDagen));
             }
         }
+      
 
         public RelayCommand IndtastUdgiftCommand { get; set; }
         public RelayCommand OpretUgeCommand { get; set; }
@@ -334,7 +336,10 @@ namespace FS_06_12_2016.ViewModel
            
             
         }
-        // Skal vise random menuer på forsiden
+        
+        /// <summary>
+        /// Skal vise random menuer på forsiden
+        /// </summary>
         public void VisRandomMenuMandag()
         {
             Random rnd = new Random();
@@ -375,7 +380,9 @@ namespace FS_06_12_2016.ViewModel
         }
 
 
-        // Regner dagens pris ud afhængig af menu kuverrt prisen.
+        /// <summary>
+        /// Regner dagens pris ud afhængig af menu kuverrt prisen på menu siden.
+        /// </summary>
         public void IaltDagensRetMandag()
         {
             IaltPaaDagen = IaltMandag * SelectedRet.PrisPrKuvert;
