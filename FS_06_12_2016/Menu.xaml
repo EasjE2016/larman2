@@ -33,8 +33,8 @@
             </StackPanel>
         </SplitView.Pane>
         <!--Content er til siderne til højre -->
-        <SplitView.Content>
-            <Grid Background="#FFBFD6FF">
+        <Viewbox>
+            <Grid Background="#FFBFD6FF" Height="1080" Width="1860">
                 <ListView x:Name="listViewMenu" HorizontalAlignment="Left" Height="997" Margin="26,10,0,0" VerticalAlignment="Top" Width="623" ItemsSource="{Binding RetListen}" SelectedItem="{Binding SelectedRet, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"/>
                 <TextBlock x:Name="textBlock" HorizontalAlignment="Left" Margin="698,10,0,0" TextWrapping="Wrap" Text="{Binding SelectedRet}" VerticalAlignment="Top" Height="467" Width="582"/>
                 <TextBox x:Name="textBoxMandagKuvert" HorizontalAlignment="Left" Margin="1335,72,0,0" TextWrapping="Wrap" Text="{Binding IaltMandag, Mode=TwoWay}" VerticalAlignment="Top" Height="80" Width="208" Header="Kuverter mandag" IsReadOnly="True"/>
@@ -54,6 +54,6 @@
 
             </Grid>
 
-        </SplitView.Content>
+        </Viewbox>
     </SplitView>
 </Page>

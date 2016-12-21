@@ -10,6 +10,8 @@ using Windows.ApplicationModel.Appointments;
 using FS_06_12_2016.Model;
 using Windows.UI.Popups;
 using System.Data;
+using System.Xml.Linq;
+using Windows.Devices.Sensors;
 using Windows.UI.Composition.Effects;
 using Windows.UI.Xaml.Controls;
 
@@ -295,6 +297,7 @@ namespace FS_06_12_2016.ViewModel
                     NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
 
                     this.alletilmeldtehuse.Add(NewHus);
+
                 }
                 else
                 {
@@ -309,31 +312,30 @@ namespace FS_06_12_2016.ViewModel
             }
         }
 
-        public void LavNyUge()
+        public async void LavNyUge()
         {
+            
+                foreach (var hus in alletilmeldtehuse)
+                {
+                    //kopiere det hus den er nået til på listen
+                    TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
+                    NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
 
-            foreach (var hus in alletilmeldtehuse)
-            {
-                //kopiere det hus den er nået til på listen
-                TilmeldteHuse mandag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
-                NyUge.MandagListe.Alletilmeldtehuse.Add(mandag_hus);
+                    TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
+                    NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
 
-                TilmeldteHuse tirsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
-                NyUge.TirsdagListe.Alletilmeldtehuse.Add(tirsdag_hus);
+                    TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
+                    NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
 
-                TilmeldteHuse onsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
-                NyUge.OnsdagListe.Alletilmeldtehuse.Add(onsdag_hus);
+                    TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
+                    NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
+                }
 
-                TilmeldteHuse torsdag_hus = new TilmeldteHuse(hus.HusNr, hus.AntalVoksen, hus.AntalUng, hus.AntalBarn, hus.MinRolle);
-                NyUge.TorsDagListe.Alletilmeldtehuse.Add(torsdag_hus);
-            }
-
-            IaltiListeMandag();
-            IaltiListeTirsdag();
-            IaltiListeOnsdag();
-            IaltiListeTorsdag();
-
-           
+                IaltiListeMandag();
+                IaltiListeTirsdag();
+                IaltiListeOnsdag();
+                IaltiListeTorsdag();
+            
             
         }
         
@@ -409,17 +411,26 @@ namespace FS_06_12_2016.ViewModel
         }
         //--------------------------------------
         //Fjern et hus fra listen en bestemt dag.
-        public void FjernHusFraDag()
+        public async void FjernHusFraDag()
         {
-            NyUge.MandagListe.Alletilmeldtehuse.Remove(SelectedHus);
-            NyUge.TirsdagListe.Alletilmeldtehuse.Remove(SelectedHus);
-            NyUge.OnsdagListe.Alletilmeldtehuse.Remove(SelectedHus);
-            NyUge.TorsDagListe.Alletilmeldtehuse.Remove(SelectedHus);
+            if (SelectedHus != null)
+            {
+                NyUge.MandagListe.Alletilmeldtehuse.Remove(SelectedHus);
+                NyUge.TirsdagListe.Alletilmeldtehuse.Remove(SelectedHus);
+                NyUge.OnsdagListe.Alletilmeldtehuse.Remove(SelectedHus);
+                NyUge.TorsDagListe.Alletilmeldtehuse.Remove(SelectedHus);
 
-            IaltiListeMandag();
-            IaltiListeTirsdag();
-            IaltiListeOnsdag();
-            IaltiListeTorsdag();
+                IaltiListeMandag();
+                IaltiListeTirsdag();
+                IaltiListeOnsdag();
+                IaltiListeTorsdag();
+            }
+            else
+            {
+                MessageDialog info = new MessageDialog("Du skal vælge et hus for at slette!");
+                await info.ShowAsync();
+            }
+            
         }
         //--------------------------------------
 
@@ -430,8 +441,11 @@ namespace FS_06_12_2016.ViewModel
             hus.DagsPris = pris;
         }
 
+
+        
         public async void Beregn()
         {
+          
             if (udgiftUge >= 1)
             {
                 NyUge.UdgiftUge = this.udgiftUge;
@@ -453,7 +467,7 @@ namespace FS_06_12_2016.ViewModel
                         }
                         else
                         {
-                            //hvis huset er lagt på listen skla den tage den nuværende value 
+                            //hvis huset er lagt på listen skal den tage den nuværende value 
                             //og lægge dagens dagspris til og lægge den tilbage ved den key(husnummer)
                             this.result = 0;
                             this.result = Ugenspris[hus.HusNr] + hus.DagsPris;
